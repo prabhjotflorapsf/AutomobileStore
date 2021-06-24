@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
+        <activity android:name=".activity_forgot_password"></activity>
+        <activity android:name=".activity_create_account" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

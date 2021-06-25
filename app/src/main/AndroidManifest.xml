@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
         <activity android:name=".Activity.PostAd"></activity>
-        <activity android:name=".Activity.Wishlist" /> <!-- <activity android:name=".Activity.SplashScreen"></activity> -->
+        <!-- <activity android:name=".Activity.SplashScreen"></activity> -->
         <activity android:name=".Activity.ForgotPassword" />
         <activity android:name=".Activity.CreateAccount" />
         <activity android:name=".MainActivity" /> <!-- <activity -->

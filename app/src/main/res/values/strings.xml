@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">AutomobileStore</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+
+    <string name="title_home">Dashboard</string>
+    <string name="title_dashboard">Wishlist</string>
+    <string name="title_notifications">Account</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="confirm_new_password">Confirm New Password*</string>

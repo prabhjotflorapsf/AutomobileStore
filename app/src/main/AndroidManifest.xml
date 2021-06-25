@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
+
         <activity android:name=".Activity.SplashScreen"></activity>
         <activity android:name=".Activity.PostAd" />
+
+
+
         <activity android:name=".Activity.ForgotPassword" />
         <activity android:name=".Activity.CreateAccount" />
         <activity

@@ -1,14 +1,16 @@
-package com.example.automobilestore;
+package com.example.automobilestore.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class activity_create_account extends AppCompatActivity {
+import com.example.automobilestore.R;
+
+public class ForgotPassword extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
+        setContentView(R.layout.activity_forgot_password);
     }
 }

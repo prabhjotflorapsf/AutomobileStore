@@ -1,4 +1,4 @@
-package com.example.automobilestore.ui.home;
+package com.example.automobilestore.Fragment.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;

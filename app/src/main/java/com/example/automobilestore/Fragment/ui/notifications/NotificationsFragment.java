@@ -1,4 +1,4 @@
-package com.example.automobilestore.ui.notifications;
+package com.example.automobilestore.Fragment.ui.notifications;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,22 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.automobilestore.Activity.CreateAccount;
 import com.example.automobilestore.Activity.ForgotPassword;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
 import com.example.automobilestore.databinding.FragmentHomeBinding;
-import com.example.automobilestore.databinding.FragmentNotificationsBinding;
-import com.example.automobilestore.ui.home.HomeFragment;
+import com.example.automobilestore.Fragment.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;

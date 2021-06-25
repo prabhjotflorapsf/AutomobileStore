@@ -2,21 +2,17 @@ package com.example.automobilestore;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.automobilestore.ui.dashboard.DashboardFragment;
-import com.example.automobilestore.ui.home.HomeFragment;
-import com.example.automobilestore.ui.notifications.NotificationsFragment;
+import com.example.automobilestore.Fragment.ui.MyAccountFragment;
+import com.example.automobilestore.Fragment.ui.dashboard.DashboardFragment;
+import com.example.automobilestore.Fragment.ui.home.HomeFragment;
+import com.example.automobilestore.Fragment.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.automobilestore.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,13 +20,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-
-
     final Fragment Dashboard = new DashboardFragment();
     final Fragment home = new HomeFragment();
-    final Fragment account = new NotificationsFragment();
-    final Fragment profile = new Fragment();
+    final Fragment account = new MyAccountFragment();
+    final Fragment profile = new NotificationsFragment();
     BottomNavigationView bottomNavigationView;
     Fragment active = home;
     private FirebaseUser curUser;
@@ -92,5 +85,4 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
-
 }

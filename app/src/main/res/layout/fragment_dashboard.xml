@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".Fragment.ui.dashboard.DashboardFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

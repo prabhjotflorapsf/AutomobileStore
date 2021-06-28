@@ -931,8 +931,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:width="150dp"
-                        android:text="@string/new_car"
-                        tools:text="New" />
+                        android:text="New" />
 
                     <RadioButton
                         android:id="@+id/used_car"

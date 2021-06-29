@@ -1,7 +1,9 @@
 package com.example.automobilestore.Fragment.ui.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,18 @@ import com.example.automobilestore.adapter.Horizontal_Car_Adapter;
 import com.example.automobilestore.databinding.FragmentHomeBinding;
 import com.example.automobilestore.model.VerticalCarData;
 import com.example.automobilestore.model.HorizontalCarData;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +39,16 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     FloatingActionButton add_btn;
-    RecyclerView popularRecycler , asiaRecycler;
-    Vertical_Car_Adapter asiaFoodAdapter;
+    RecyclerView HorizontalRecycler, VerticalRecycler;
+    Vertical_Car_Adapter VerticalAdapter;
+    StorageReference storageReference;
+    private FirebaseAuth auth;
+    FirebaseFirestore db;
+    private FirebaseUser curUser;
+    List<HorizontalCarData> HorizontalList = new ArrayList<>();
+    List<VerticalCarData> VerticalList = new ArrayList<>();
 
-    Horizontal_Car_Adapter popularFoodAdapter;
+    Horizontal_Car_Adapter HorizontalAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,8 +56,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         add_btn=v.findViewById(R.id.add_post_btn);
-        popularRecycler = v.findViewById(R.id.rv_hcar);
-        asiaRecycler = v.findViewById(R.id.rv_vcar);
+        HorizontalRecycler = v.findViewById(R.id.rv_hcar);
+        VerticalRecycler = v.findViewById(R.id.rv_vcar);
 
         RefreshData(v);
 
@@ -57,43 +76,109 @@ public class HomeFragment extends Fragment {
     }
 
     private void RefreshData(View v) {
-        List<HorizontalCarData> popularFoodList = new ArrayList<>();
 
-        popularFoodList.add(new HorizontalCarData("Honda", "$19000", R.drawable.logo));
-        popularFoodList.add(new HorizontalCarData("Hyundai", "$17000", R.drawable.logo));
-        popularFoodList.add(new HorizontalCarData("Toyota", "$25000", R.drawable.logo));
-        popularFoodList.add(new HorizontalCarData("Ford", "$7000", R.drawable.logo));
-        popularFoodList.add(new HorizontalCarData("Mazda", "$17899", R.drawable.logo));
-        popularFoodList.add(new HorizontalCarData("Suzuki", "$5670", R.drawable.logo));
-        setPopularRecycler(popularFoodList);
+//
+//        HorizontalList.add(new HorizontalCarData("Honda", "$19000", R.drawable.logo));
+//        HorizontalList.add(new HorizontalCarData("Hyundai", "$17000", R.drawable.logo));
+//        HorizontalList.add(new HorizontalCarData("Toyota", "$25000", R.drawable.logo));
+//        HorizontalList.add(new HorizontalCarData("Ford", "$7000", R.drawable.logo));
+//        HorizontalList.add(new HorizontalCarData("Mazda", "$17899", R.drawable.logo));
+//        HorizontalList.add(new HorizontalCarData("Suzuki", "$5670", R.drawable.logo));
+//        setHorizontal(HorizontalList);
+//
+//        List<VerticalCarData> VerticalList = new ArrayList<>();
+//        VerticalList.add(new VerticalCarData("Honda", "$19000", R.drawable.logo,  "OLD"));
+//        VerticalList.add(new VerticalCarData("Hyundai", "$17000", R.drawable.logo,  "OLD"));
+//        VerticalList.add(new VerticalCarData("Toyota", "$25000", R.drawable.logo,  "NEW"));
+//        VerticalList.add(new VerticalCarData("Ford", "$7000", R.drawable.logo, "NEW"));
+//        VerticalList.add(new VerticalCarData("Mazda", "$17899", R.drawable.logo, "OLD"));
+//        VerticalList.add(new VerticalCarData("Suzuki", "$5670", R.drawable.logo, "NEW"));
+//
+//        setVertical(VerticalList);
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        curUser = auth.getCurrentUser();
+        String userId = null;
+        if (curUser != null) {
+            userId = curUser.getUid(); //Do what you need to do with the id
+        }
+        db.collection("Car")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("", document.getId() + " => " + document.getData());
+                                System.out.println(document.getId() + " => " + document.getData());
+                                String Model = (String) document.getData().get("Model");
+                                String Amount = (String) document.getData().get("Amount");
+                                String Conditon=(String) document.getData().get("Conditon");
+                                String UserID=document.getId();
+                                getImage(UserID,Model,Amount,Conditon);
+                                setHorizontal();
+                                setVertical();
 
-        List<VerticalCarData> asiaFoodList = new ArrayList<>();
-        asiaFoodList.add(new VerticalCarData("Honda", "$19000", R.drawable.logo,  "OLD"));
-        asiaFoodList.add(new VerticalCarData("Hyundai", "$17000", R.drawable.logo,  "OLD"));
-        asiaFoodList.add(new VerticalCarData("Toyota", "$25000", R.drawable.logo,  "NEW"));
-        asiaFoodList.add(new VerticalCarData("Ford", "$7000", R.drawable.logo, "NEW"));
-        asiaFoodList.add(new VerticalCarData("Mazda", "$17899", R.drawable.logo, "OLD"));
-        asiaFoodList.add(new VerticalCarData("Suzuki", "$5670", R.drawable.logo, "NEW"));
+                                Log.d("modellll", "modellll" + Model);
+                                Log.d("amountttt", "amounttttt" +   Amount);
 
-        setAsiaRecycler(asiaFoodList);
+
+                            }
+
+                        } else {
+                            Log.d("", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
 //
 //
     }
-    private void setPopularRecycler(List<HorizontalCarData> popularFoodList) {
+    private void setHorizontal() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-        popularRecycler.setLayoutManager(layoutManager);
-        popularFoodAdapter = new Horizontal_Car_Adapter(getActivity(), popularFoodList);
-        popularRecycler.setAdapter(popularFoodAdapter);
+        HorizontalRecycler.setLayoutManager(layoutManager);
+        HorizontalAdapter = new Horizontal_Car_Adapter(getActivity(), HorizontalList);
+        HorizontalRecycler.setAdapter(HorizontalAdapter);
     }
-    private void setAsiaRecycler(List<VerticalCarData> asiaFoodList) {
+    private void setVertical() {
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
-        asiaRecycler.setLayoutManager(layoutManager);
-        asiaFoodAdapter = new Vertical_Car_Adapter(getActivity(), asiaFoodList);
-        asiaRecycler.setAdapter(asiaFoodAdapter);
+        VerticalRecycler.setLayoutManager(layoutManager);
+        VerticalAdapter = new Vertical_Car_Adapter(getActivity(), VerticalList);
+        VerticalRecycler.setAdapter(VerticalAdapter);
 
+    }
+    private void getImage(final String UserID,final String Model,final String Amount,final String Conditon) {
+        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference.child("images/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+                Log.d("TAG", "image got");
+                if(Conditon.equals("yes")||Conditon.equals("Yes")){
+                    HorizontalList.add(new HorizontalCarData(Model, Amount, uri));
+                    HorizontalAdapter.notifyDataSetChanged();
+                }
+                else{
+                    if (Conditon=="yes"||Conditon=="Yes"){
+                        VerticalList.add(new VerticalCarData(Model, Amount,uri,"NEW"));
+                    }else{
+                        VerticalList.add(new VerticalCarData(Model, Amount,uri,"OlD"));
+                    }
+
+                    setVertical();
+                    VerticalAdapter.notifyDataSetChanged();
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Log.d("TAG", "image not got");
+            }
+        });
     }
 
 

@@ -1,13 +1,23 @@
 package com.example.automobilestore.model;
 
+import android.net.Uri;
+
 public class VerticalCarData {
 
     String name;
     String price;
-    Integer imageUrl;
+    private Uri imageUrl;
     String condition;
 
-    public VerticalCarData(String name, String price, Integer imageUrl, String condition) {
+    public Uri getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(Uri imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public VerticalCarData(String name, String price, Uri imageUrl, String condition) {
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
@@ -40,11 +50,5 @@ public class VerticalCarData {
         this.price = price;
     }
 
-    public Integer getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(Integer imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

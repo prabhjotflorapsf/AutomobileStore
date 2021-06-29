@@ -1,12 +1,26 @@
 package com.example.automobilestore.model;
 
+import android.net.Uri;
+
 public class HorizontalCarData {
 
     String name;
     String price;
-    Integer imageUrl;
 
-    public HorizontalCarData(String name, String price, Integer imageUrl) {
+    public Uri getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(Uri imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private Uri imageUrl;
+
+
+
+
+    public HorizontalCarData(String name, String price,  Uri imageUrl) {
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
@@ -28,11 +42,5 @@ public class HorizontalCarData {
         this.price = price;
     }
 
-    public Integer getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(Integer imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

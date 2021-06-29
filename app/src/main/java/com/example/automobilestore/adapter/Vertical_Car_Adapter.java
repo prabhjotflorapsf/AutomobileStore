@@ -10,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.automobilestore.R;
 import com.example.automobilestore.model.VerticalCarData;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,13 +21,13 @@ import java.util.List;
 public class Vertical_Car_Adapter extends RecyclerView.Adapter<Vertical_Car_Adapter.VerticalViewHolder> {
 
     Context context;
-    List<VerticalCarData> asiaFoodList;
+    List<VerticalCarData> Vertiacllist;
 
 
 
     public Vertical_Car_Adapter(Context context, List<VerticalCarData> asiaFoodList) {
         this.context = context;
-        this.asiaFoodList = asiaFoodList;
+        this.Vertiacllist = asiaFoodList;
     }
 
     @NonNull
@@ -38,17 +40,16 @@ public class Vertical_Car_Adapter extends RecyclerView.Adapter<Vertical_Car_Adap
 
     @Override
     public void onBindViewHolder(VerticalViewHolder holder, int position) {
-
-        holder.carv_image.setImageResource(asiaFoodList.get(position).getImageUrl());
-        holder.v_name.setText(asiaFoodList.get(position).getName());
-        holder.v_amount.setText(asiaFoodList.get(position).getPrice());
-        holder.Condition_tv.setText(asiaFoodList.get(position).getCondition());
+        Picasso.get().load(Vertiacllist.get(position).getImageUrl()).fit().into(holder.carv_image);
+        holder.v_name.setText(Vertiacllist.get(position).getName());
+        holder.v_amount.setText("$"+Vertiacllist.get(position).getPrice());
+        holder.Condition_tv.setText(Vertiacllist.get(position).getCondition());
 
     }
 
     @Override
     public int getItemCount() {
-        return asiaFoodList.size();
+        return Vertiacllist.size();
     }
 
 

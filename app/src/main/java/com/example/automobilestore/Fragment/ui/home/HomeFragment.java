@@ -1,12 +1,21 @@
 package com.example.automobilestore.Fragment.ui.home;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,6 +34,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.slider.RangeSlider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,8 +57,12 @@ public class HomeFragment extends Fragment {
     private FirebaseUser curUser;
     List<HorizontalCarData> HorizontalList = new ArrayList<>();
     List<VerticalCarData> VerticalList = new ArrayList<>();
-
     Horizontal_Car_Adapter HorizontalAdapter;
+    boolean priceChanged = false;
+    boolean passengerChanged = false;
+    ImageView filter;
+    float min = 0, max = 100000;
+    float minp = 1, maxp = 8;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +73,7 @@ public class HomeFragment extends Fragment {
         HorizontalRecycler = v.findViewById(R.id.rv_hcar);
         VerticalRecycler = v.findViewById(R.id.rv_vcar);
 
-        RefreshData(v);
+        RefreshData();
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,11 +85,19 @@ public class HomeFragment extends Fragment {
 
             }
         });
+        filter = v.findViewById(R.id.filter);
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filter(getActivity());
+            }
+        });
+
 
         return v;
     }
 
-    private void RefreshData(View v) {
+    private void RefreshData() {
 
 //
 //        HorizontalList.add(new HorizontalCarData("Honda", "$19000", R.drawable.logo));
@@ -95,6 +117,8 @@ public class HomeFragment extends Fragment {
 //        VerticalList.add(new VerticalCarData("Suzuki", "$5670", R.drawable.logo, "NEW"));
 //
 //        setVertical(VerticalList);
+        HorizontalList.clear();
+        VerticalList.clear();
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         curUser = auth.getCurrentUser();
@@ -191,10 +215,218 @@ public class HomeFragment extends Fragment {
     }
 
 
-//    private void AddPost() {
+    //    private void AddPost() {
 //        Toast.makeText(getActivity(),"hello",Toast.LENGTH_LONG).show();
 //    }
+    public void filter(final Activity activity) {
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.activity_filter);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
 
+        wlp.gravity = Gravity.CENTER;
+        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        window.setAttributes(wlp);
+        final RangeSlider price_slider = dialog.findViewById(R.id.price_slider);
+        final RangeSlider Seaters_slider = dialog.findViewById(R.id.Seaters_slider);
+        final TextView to = dialog.findViewById(R.id.to);
+        final TextView from = dialog.findViewById(R.id.from);
+        final TextView toSeaters = dialog.findViewById(R.id.toSeaters);
+        final TextView fromSeaters = dialog.findViewById(R.id.fromSeaters);
+//   dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//       @Override
+//       public void onDismiss(DialogInterface dialog) {
+//           RefreshData();
+//       }
+//   });
+
+        price_slider.setValues(min, max);
+        to.setText("Min " + min);
+        from.setText("Max " + max);
+        dialog.show();
+
+
+        Seaters_slider.setValues(minp, maxp);
+        toSeaters.setText("Min " + minp);
+        fromSeaters.setText("Max " + maxp);
+        dialog.show();
+
+        Button apply = dialog.findViewById(R.id.apply);
+        Button reset = dialog.findViewById(R.id.reset);
+
+        price_slider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
+            @Override
+            public void onStartTrackingTouch(@NonNull RangeSlider slider) {
+                List price = slider.getValues();
+                min = (float) price.get(0);
+                max = (float) price.get(1);
+                to.setText("Min " + min);
+                from.setText("Max " + max);
+            }
+
+            @Override
+            public void onStopTrackingTouch(@NonNull RangeSlider slider) {
+                List price = slider.getValues();
+                min = (float) price.get(0);
+                max = (float) price.get(1);
+                to.setText("Min " + min);
+                from.setText("Max " + max);
+            }
+        });
+
+        price_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                List price = slider.getValues();
+                min = (float) price.get(0);
+                max = (float) price.get(1);
+                to.setText("Min " + min);
+                from.setText("Max " + max);
+            }
+        });
+
+        Seaters_slider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
+            @Override
+            public void onStartTrackingTouch(@NonNull RangeSlider slider) {
+                List Passenger = slider.getValues();
+                minp = (float) Passenger.get(0);
+                maxp = (float) Passenger.get(1);
+                toSeaters.setText("Min " + minp);
+                fromSeaters.setText("Max " + maxp);
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(@NonNull RangeSlider slider) {
+                List Passenger = slider.getValues();
+                minp = (float) Passenger.get(0);
+                maxp = (float) Passenger.get(1);
+                toSeaters.setText("Min " + minp);
+                fromSeaters.setText("Max " + maxp);
+
+            }
+        });
+
+        Seaters_slider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                List Passenger = slider.getValues();
+                minp = (float) Passenger.get(0);
+                maxp = (float) Passenger.get(1);
+                toSeaters.setText("Min " + minp);
+                fromSeaters.setText("Max " + maxp);
+            }
+        });
+
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List price = price_slider.getValues();
+                min = (float) price.get(0);
+                max = (float) price.get(1);
+                to.setText("Min " + min);
+                from.setText("Max " + max);
+                Log.d("", min + "");
+                priceChanged = true;
+
+                List passenger = Seaters_slider.getValues();
+                Log.d("", "VALUE SET " + passenger);
+                minp = (float) passenger.get(0);
+                Log.d("", "VALUE SET " + minp);
+                maxp = (float) passenger.get(1);
+                Log.d("", "VALUE SET " + maxp);
+                toSeaters.setText("Min " + minp);
+                Log.d("", "VALUE SET " + toSeaters);
+                fromSeaters.setText("Max " + maxp);
+                Log.d("", "VALUE SET " + fromSeaters);
+                passengerChanged = true;
+                dialog.dismiss();
+                FilterData();
+            }
+        });
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                min = 0;
+                max = 100000;
+                to.setText("Min " + min);
+                from.setText("Max " + max);
+                priceChanged = false;
+
+                minp = 1;
+                maxp = 8;
+                toSeaters.setText("Min " + minp);
+                fromSeaters.setText("Max " + maxp);
+                passengerChanged = false;
+                dialog.dismiss();
+                FilterData();
+            }
+        });
+
+    }
+    private void FilterData() {
+
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        curUser = auth.getCurrentUser();
+        String userId = null;
+        if (curUser != null) {
+            userId = curUser.getUid(); //Do what you need to do with the id
+        }
+        db.collection("Car")
+//                .whereGreaterThan("Amount",min).whereLessThan("Amount",max)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("Filterrrrrr Data", "filter calll") ;
+                                Log.d("", document.getId() + " => " + document.getData());
+                                System.out.println(document.getId() + " => " + document.getData());
+                                String Model = (String) document.getData().get("Model");
+                                Float Amount = Float.parseFloat(String.valueOf(document.getData().get("Amount")));
+                                String Conditon=(String) document.getData().get("Conditon");
+                                int Seaters=Integer.parseInt(String.valueOf(document.getData().get("Seaters")));
+                                String UserID=document.getId();
+
+
+                                Log.d("Filterrrrrr Data", "filter modellll" + Model);
+                                Log.d("Filterrrrrr Data", "filter amounttttt" +   Amount);
+                                if (priceChanged && passengerChanged) {
+                                    if (Amount >= min && Amount <= max && Seaters >= minp && Seaters <= maxp) {
+                                        HorizontalList.clear();
+                                        VerticalList.clear();
+                                        getImage(UserID, Model, Amount.toString(), Conditon);
+                                        setHorizontal();
+                                        setVertical();
+                                    }
+                                    else {
+                                        HorizontalList.clear();
+                                        VerticalList.clear();
+                                        setHorizontal();
+                                        setVertical();
+//                                        Toast.makeText(getActivity().getApplicationContext(),"Oops No Cars Found",Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getActivity().getApplicationContext(), "else call", Toast.LENGTH_SHORT).show();
+                                }
+
+
+                            }
+
+                        } else {
+                            Log.d("", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+    }
 
 
 }

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.automobilestore.Activity.CreateAccount;
 import com.example.automobilestore.Activity.ForgotPassword;
+import com.example.automobilestore.Activity.admin_signin;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
 import com.example.automobilestore.databinding.FragmentHomeBinding;
@@ -33,7 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class NotificationsFragment extends Fragment {
 
     public TextInputLayout Email, Password;
-    Button create, login, forgot;
+    Button create, login, forgot, admin;
     ProgressDialog pd;
     private FirebaseAuth auth;
     private FirebaseUser curUser;
@@ -76,6 +77,7 @@ public class NotificationsFragment extends Fragment {
         create = v.findViewById(R.id.create);
         login = v.findViewById(R.id.login);
         forgot = v.findViewById(R.id.forgotpass);
+        admin = v.findViewById(R.id.adminSignin);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +138,13 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), CreateAccount.class);
+                startActivity(i);
+            }
+        });
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity().getApplicationContext(), admin_signin.class);
                 startActivity(i);
             }
         });

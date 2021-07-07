@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.automobilestore.R;
+
 public class UpdateAd extends AppCompatActivity {
 
     @Override

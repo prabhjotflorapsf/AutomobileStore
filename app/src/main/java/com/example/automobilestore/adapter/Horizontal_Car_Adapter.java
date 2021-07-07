@@ -11,8 +11,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.automobilestore.R;
 import com.example.automobilestore.model.HorizontalCarData;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,13 +22,13 @@ import java.util.List;
 public class Horizontal_Car_Adapter extends RecyclerView.Adapter<Horizontal_Car_Adapter.HorizontalViewHolder> {
 
     Context context;
-    List<HorizontalCarData> popularFoodList;
+    List<HorizontalCarData> HorizontalList;
 
 
 
     public Horizontal_Car_Adapter(Context context, List<HorizontalCarData> popularFoodList) {
         this.context = context;
-        this.popularFoodList = popularFoodList;
+        this.HorizontalList = popularFoodList;
     }
 
     @NonNull
@@ -40,9 +42,9 @@ public class Horizontal_Car_Adapter extends RecyclerView.Adapter<Horizontal_Car_
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
 
-        holder.carh_image.setImageResource(popularFoodList.get(position).getImageUrl());
-        holder.h_name.setText(popularFoodList.get(position).getName());
-        holder.h_amount.setText(popularFoodList.get(position).getPrice());
+        Picasso.get().load(HorizontalList.get(position).getImageUrl()).fit().into(holder.carh_image);
+        holder.h_name.setText(HorizontalList.get(position).getName());
+        holder.h_amount.setText("$"+HorizontalList.get(position).getPrice());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +60,7 @@ public class Horizontal_Car_Adapter extends RecyclerView.Adapter<Horizontal_Car_
 
     @Override
     public int getItemCount() {
-        return popularFoodList.size();
+        return HorizontalList.size();
     }
 
 

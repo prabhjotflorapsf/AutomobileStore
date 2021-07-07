@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
 
+
         <activity android:name=".Activity.admin_signin"></activity>
         <activity android:name=".Activity.AdminHome"></activity>
         <activity android:name=".Activity.PostList" />
+
+        <activity android:name=".Activity.PostList"></activity>
         <activity android:name=".Activity.Filter" />
         <activity android:name=".Activity.admin_signin" />
         <activity android:name=".Activity.ProfileDetails" />

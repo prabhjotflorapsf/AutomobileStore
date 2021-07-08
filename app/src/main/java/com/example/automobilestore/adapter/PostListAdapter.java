@@ -1,6 +1,7 @@
 package com.example.automobilestore.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.automobilestore.Activity.UpdateAd;
 import com.example.automobilestore.R;
 import com.example.automobilestore.model.PostListModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,9 +60,9 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(view.getContext(), UpdateAd.class);
-//                i.putExtra("id", postlist.get(position).getApartmentId());
-//                context.startActivity(i);
+                Intent i = new Intent(view.getContext(), UpdateAd.class);
+                i.putExtra("id", postlist.get(position).getCarId());
+                context.startActivity(i);
             }
         });
     }

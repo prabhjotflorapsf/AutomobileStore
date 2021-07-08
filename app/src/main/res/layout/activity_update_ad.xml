@@ -320,14 +320,14 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/Prakingyes"
+                        android:id="@+id/Pyes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:width="150dp"
                         android:text="@string/yes" />
 
                     <RadioButton
-                        android:id="@+id/parkingno"
+                        android:id="@+id/Pno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -581,18 +581,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:checkedButton="@id/yyes"
+                    android:checkedButton="@id/Tyes"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/yyes"
+                        android:id="@+id/Tyes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:width="150dp"
                         android:text="@string/automatic" />
 
                     <RadioButton
-                        android:id="@+id/yno"
+                        android:id="@+id/Tno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -652,18 +652,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:checkedButton="@id/pyes"
+                    android:checkedButton="@id/pwyes"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/pyes"
+                        android:id="@+id/pwyes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:width="150dp"
                         android:text="@string/yes" />
 
                     <RadioButton
-                        android:id="@+id/pno"
+                        android:id="@+id/pwno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -949,7 +949,7 @@
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#3cb6d3"
                 android:singleLine="true"
-                android:text="@string/update_ad" />
+                android:text="update_ad" />
 
         </LinearLayout>
 

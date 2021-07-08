@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.automobilestore.R;
 import com.example.automobilestore.adapter.PostListAdapter;
@@ -55,10 +54,10 @@ public class PostList extends AppCompatActivity {
         if (curUser != null) {
             userId = curUser.getUid(); //Do what you need to do with the id
         }
-        getApartmetList();
+        getCarList();
     }
 
-    private void getApartmetList() {
+    private void getCarList() {
         db = FirebaseFirestore.getInstance();
         db.collection("Car")
                 .whereEqualTo("UserID", userId)
@@ -118,6 +117,6 @@ public class PostList extends AppCompatActivity {
         super.onRestart();
         postlist.clear();
         postlistAdapter.notifyDataSetChanged();
-        getApartmetList();
+        getCarList();
     }
 }

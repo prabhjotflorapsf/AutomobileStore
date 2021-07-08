@@ -131,4 +131,3 @@ public class CarDialog extends AppCompatActivity {
     }
 
 }
-}

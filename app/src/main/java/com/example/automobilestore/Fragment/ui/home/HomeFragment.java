@@ -182,7 +182,7 @@ public class HomeFragment extends Fragment {
                 // Got the download URL for 'users/me/profile.png'
                 Log.d("TAG", "image got"+Conditon);
                 if(Conditon.equals("yes")||Conditon.equals("Yes")){
-                    HorizontalList.add(new HorizontalCarData(Model, Amount, uri));
+                    HorizontalList.add(new HorizontalCarData(UserID,Model, Amount, uri));
                     HorizontalAdapter.notifyDataSetChanged();
                 }
                 else{

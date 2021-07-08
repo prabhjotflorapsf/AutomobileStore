@@ -187,9 +187,9 @@ public class HomeFragment extends Fragment {
                 }
                 else{
                     if (Conditon=="yes"||Conditon=="Yes"){
-                        VerticalList.add(new VerticalCarData(Model, Amount,uri,"NEW"));
+                        VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,"NEW"));
                     }else{
-                        VerticalList.add(new VerticalCarData(Model, Amount,uri,"OlD"));
+                        VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,"OlD"));
                     }
 
                     setVertical();

@@ -1,6 +1,7 @@
 package com.example.automobilestore.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.automobilestore.Activity.CarDetails;
 import com.example.automobilestore.R;
 import com.example.automobilestore.model.VerticalCarData;
 import com.squareup.picasso.Picasso;
@@ -44,6 +46,17 @@ public class Vertical_Car_Adapter extends RecyclerView.Adapter<Vertical_Car_Adap
         holder.v_name.setText(Vertiacllist.get(position).getName());
         holder.v_amount.setText("$"+Vertiacllist.get(position).getPrice());
         holder.Condition_tv.setText(Vertiacllist.get(position).getCondition());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//
+//                Toast.makeText(context, "position"+position, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(view.getContext(), CarDetails.class);
+                i.putExtra("id", Vertiacllist.get(position).getId());
+                context.startActivity(i);
+
+            }
+        });
 
     }
 

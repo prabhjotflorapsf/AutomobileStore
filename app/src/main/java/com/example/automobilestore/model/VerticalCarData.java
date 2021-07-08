@@ -3,11 +3,20 @@ package com.example.automobilestore.model;
 import android.net.Uri;
 
 public class VerticalCarData {
-
+    String id;
     String name;
     String price;
     private Uri imageUrl;
     String condition;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public Uri getImageUrl() {
         return imageUrl;
@@ -17,11 +26,12 @@ public class VerticalCarData {
         this.imageUrl = imageUrl;
     }
 
-    public VerticalCarData(String name, String price, Uri imageUrl, String condition) {
+    public VerticalCarData(String id,String name, String price, Uri imageUrl, String condition) {
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
         this.condition = condition;
+        this.id=id;
     }
 
 

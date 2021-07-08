@@ -1,6 +1,7 @@
 package com.example.automobilestore.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.automobilestore.Activity.CarDetails;
 import com.example.automobilestore.R;
 import com.example.automobilestore.model.HorizontalCarData;
 import com.squareup.picasso.Picasso;
@@ -49,8 +51,19 @@ public class Horizontal_Car_Adapter extends RecyclerView.Adapter<Horizontal_Car_
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 //
-                Toast.makeText(context, "position"+position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "position"+position, Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(view.getContext(), CarDetails.class);
+                        i.putExtra("id", HorizontalList.get(position).getId());
+                        context.startActivity(i);
+
+                    }
+                });
+
 
             }
         });

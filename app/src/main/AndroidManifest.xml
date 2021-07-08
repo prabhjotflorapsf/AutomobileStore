@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
-        <activity android:name=".Activity.CarDialog"></activity>
+        <activity android:name=".Activity.Contact"></activity>
+        <activity android:name=".Activity.CarDialog" />
         <activity android:name=".Activity.CarDetails" />
         <activity android:name=".Activity.UpdateAd" />
         <activity android:name=".Activity.admin_signin" />

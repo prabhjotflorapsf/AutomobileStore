@@ -55,7 +55,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/admin_password"
         android:layout_width="match_parent"
-        android:layout_height="227dp"
+        android:layout_height="287dp"
         android:layout_marginTop="15dp"
         android:hint="Password"
         app:endIconMode="password_toggle">
@@ -79,6 +79,29 @@
             android:backgroundTint="#272670"
             android:singleLine="true"
             android:text="SignIn" />
+
+        <Button
+            android:id="@+id/admin_create"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="New Admin? Register here"
+            android:textColor="#272670"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/admin_forgotpass"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Forgot Password?"
+            android:textColor="#272670"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>

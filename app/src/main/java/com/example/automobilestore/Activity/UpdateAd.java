@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,6 +31,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +43,7 @@ import com.google.firebase.storage.UploadTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateAd extends AppCompatActivity {
@@ -66,46 +70,46 @@ public class UpdateAd extends AppCompatActivity {
         Intent intent = getIntent();
         doc_id = intent.getStringExtra("id");
         et_model = findViewById(R.id.Model_Update);
-        et_description=findViewById(R.id.des__Update);
-        et_amount=findViewById(R.id.amount_Update);
-        et_phone_number=findViewById(R.id.pnum_Update);
-        et_address=findViewById(R.id.address);
-        et_seaters=findViewById(R.id.seaters);
-        et_Car_Classification=findViewById(R.id.car_class);
-        et_color=findViewById(R.id.car_color);
-        et_power=findViewById(R.id.Power);
-        et_year=findViewById(R.id.year);
+        et_description = findViewById(R.id.des__Update);
+        et_amount = findViewById(R.id.amount_Update);
+        et_phone_number = findViewById(R.id.pnum_Update);
+        et_address = findViewById(R.id.address);
+        et_seaters = findViewById(R.id.seaters);
+        et_Car_Classification = findViewById(R.id.car_class);
+        et_color = findViewById(R.id.car_color);
+        et_power = findViewById(R.id.Power);
+        et_year = findViewById(R.id.year);
 
 
         upload = findViewById(R.id.uploadImage_Update);
-        del=findViewById(R.id.delete);
+        del = findViewById(R.id.delete);
         image = new ImageView[]{upload, selectedImage1, selectedImage2, selectedImage3};
 
         Button btn_update = findViewById(R.id.Update_ad);
-        rbGps=findViewById(R.id.rbGps__Update);
-        rbAirbags =findViewById(R.id.rbAirbags_Update);
-        rbParking=findViewById(R.id.rbParking_Update);
-        rbFuelType=findViewById(R.id.rbFuelType_Update);
-        rbBluetooth=findViewById(R.id.rbBluetooth_Update);
-        rbair_conditioning=findViewById(R.id.rbair_conditioning_Update);
-        rbTransmission=findViewById(R.id.rbTransmission_Update);
-        rbpowerwindow=findViewById(R.id.rbpowerwindow_Update);
-        rb_bssenser=findViewById(R.id.rb_bssenser_Update);
-        rbsroof=findViewById(R.id.rbsroof_Update);
-        rbaids=findViewById(R.id.rbaids_Update);
-        rbcondition=findViewById(R.id.rbcondition_Update);
-        AutoCompleteTextView seaters=findViewById(R.id.et_seaters_Update);
-        AutoCompleteTextView Car_Classification=findViewById(R.id.et_Car_Classification_Update);
-        AutoCompleteTextView car_color=findViewById(R.id.et_color_Update);
-        AutoCompleteTextView car_year=findViewById(R.id.et_year_Update);
-        String[] seater = new String[]{"2", "4", "6","8","10"};
+        rbGps = findViewById(R.id.rbGps__Update);
+        rbAirbags = findViewById(R.id.rbAirbags_Update);
+        rbParking = findViewById(R.id.rbParking_Update);
+        rbFuelType = findViewById(R.id.rbFuelType_Update);
+        rbBluetooth = findViewById(R.id.rbBluetooth_Update);
+        rbair_conditioning = findViewById(R.id.rbair_conditioning_Update);
+        rbTransmission = findViewById(R.id.rbTransmission_Update);
+        rbpowerwindow = findViewById(R.id.rbpowerwindow_Update);
+        rb_bssenser = findViewById(R.id.rb_bssenser_Update);
+        rbsroof = findViewById(R.id.rbsroof_Update);
+        rbaids = findViewById(R.id.rbaids_Update);
+        rbcondition = findViewById(R.id.rbcondition_Update);
+        AutoCompleteTextView seaters = findViewById(R.id.et_seaters_Update);
+        AutoCompleteTextView Car_Classification = findViewById(R.id.et_Car_Classification_Update);
+        AutoCompleteTextView car_color = findViewById(R.id.et_color_Update);
+        AutoCompleteTextView car_year = findViewById(R.id.et_year_Update);
+        String[] seater = new String[]{"2", "4", "6", "8", "10"};
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(
                 UpdateAd.this,
                 R.layout.dropdown_item,
                 seater
         );
         seaters.setAdapter(adapter1);
-        String[] Classification = new String[]{"SEDAN", "COUPE", "SPORTS CAR","STATION WAGON","HATCHBACK","CONVERTIBLE","SPORT-UTILITY VEHICLE (SUV)","MINIVAN","PICKUP TRUCK","Others"};
+        String[] Classification = new String[]{"SEDAN", "COUPE", "SPORTS CAR", "STATION WAGON", "HATCHBACK", "CONVERTIBLE", "SPORT-UTILITY VEHICLE (SUV)", "MINIVAN", "PICKUP TRUCK", "Others"};
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(
                 UpdateAd.this,
@@ -114,7 +118,7 @@ public class UpdateAd extends AppCompatActivity {
         );
         Car_Classification.setAdapter(adapter2);
 
-        String[] colors = new String[]{"White", "Black", "Gray","Silver","Red","Blue","Brown","Green","Beige","Orange","Gold","Yellow","Purple","Others"};
+        String[] colors = new String[]{"White", "Black", "Gray", "Silver", "Red", "Blue", "Brown", "Green", "Beige", "Orange", "Gold", "Yellow", "Purple", "Others"};
 
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(
                 UpdateAd.this,
@@ -122,7 +126,7 @@ public class UpdateAd extends AppCompatActivity {
                 colors
         );
         car_color.setAdapter(adapter3);
-        String[] year = new String[]{"2000", "2001", "2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021"};
+        String[] year = new String[]{"2000", "2001", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"};
 
         ArrayAdapter<String> adapter4 = new ArrayAdapter<>(
                 UpdateAd.this,
@@ -144,7 +148,7 @@ public class UpdateAd extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int item) {
                         if (options[item].equals("Delete")) {
                             delete();
-                            HomeFragment hm=new HomeFragment();
+                            HomeFragment hm = new HomeFragment();
                             hm.RefreshData();
                         } else if (options[item].equals("Cancel")) {
                             dialog.dismiss();
@@ -152,6 +156,192 @@ public class UpdateAd extends AppCompatActivity {
                     }
                 });
                 builder1.show();
+
+            }
+        });
+        btn_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fstore = FirebaseFirestore.getInstance();
+                final String Model = et_model.getEditText().getText().toString().trim();
+                final String Description = et_description.getEditText().getText().toString().trim();
+                final String Address = et_address.getEditText().getText().toString().trim();
+                final String Amount = et_amount.getEditText().getText().toString().trim();
+                String PhoneNumber = et_phone_number.getEditText().getText().toString().trim();
+                String Seaters = et_seaters.getEditText().getText().toString().trim();
+                String Classification = et_Car_Classification.getEditText().getText().toString().trim();
+                String Color = et_color.getEditText().getText().toString().trim();
+                String Power = et_power.getEditText().getText().toString().trim();
+                String Year = et_year.getEditText().getText().toString().trim();
+                if (Model.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please Enter Model", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Description.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please Enter Description", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Description.length() > 10000) {
+                    Toast.makeText(UpdateAd.this, "Title should be 10000 letters in length", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Amount.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please enter Amount ", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Amount.matches(".*[a-zA-Z]+.*")) {
+                    Toast.makeText(UpdateAd.this, "Please Enter Amount in Digit", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Address == null) {
+                    Toast.makeText(UpdateAd.this, "Please enter Address ", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (PhoneNumber.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please enter PhoneNumber ", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (PhoneNumber.matches(".*[a-zA-Z]+.*")) {
+                    Toast.makeText(UpdateAd.this, "Please Enter PhoneNumber in Digit", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (PhoneNumber.length() < 10 || PhoneNumber.length() > 10) {
+                    Toast.makeText(UpdateAd.this, "Please enter 10 to 12 digit PhoneNumber", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Seaters.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please Select Seaters from DropDown", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Classification.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please Select Car Type from DropDown", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Color.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please Select Car Color from DropDown", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Power.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please enter the Engine Power ", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Power.matches(".*[a-zA-Z]+.*")) {
+                    Toast.makeText(UpdateAd.this, "Please Enter Power in Digit", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (Year.isEmpty()) {
+                    Toast.makeText(UpdateAd.this, "Please Select Car year from DropDown ", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (photos < 1) {
+                    Toast.makeText(UpdateAd.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
+                } else {
+                    final ProgressDialog pd;
+                    pd = new ProgressDialog(UpdateAd.this);
+                    pd.setMessage("Loading...");
+                    pd.show();
+                    int selectedId1 = rbGps.getCheckedRadioButtonId();
+                    btn_Gps = findViewById(selectedId1);
+                    String Gps = btn_Gps.getText().toString().trim();
+                    Log.v("tagvv", " " + Gps);
+
+                    int selectedId2 = rbAirbags.getCheckedRadioButtonId();
+                    btn_Airbags = findViewById(selectedId2);
+                    String AirBags = btn_Airbags.getText().toString().trim();
+                    Log.v("tagvv", " " + AirBags);
+
+                    int selectedId3 = rbParking.getCheckedRadioButtonId();
+                    btn_Parking = findViewById(selectedId3);
+                    String Parking_Sensor = btn_Parking.getText().toString().trim();
+                    Log.v("tagvv", " " + Parking_Sensor);
+
+                    int selectedId4 = rbFuelType.getCheckedRadioButtonId();
+                    btn_FuelType = findViewById(selectedId4);
+                    String Fuel_type = btn_FuelType.getText().toString().trim();
+                    Log.v("tagvv", " " + Fuel_type);
+
+                    int selectedId5 = rbBluetooth.getCheckedRadioButtonId();
+                    btn_Bluetooth = findViewById(selectedId5);
+                    String Bluetooth = btn_Bluetooth.getText().toString().trim();
+                    Log.v("tagvv", " " + Bluetooth);
+
+                    int selectedId6 = rbair_conditioning.getCheckedRadioButtonId();
+                    btn_air_conditioning = findViewById(selectedId6);
+                    String AC = btn_air_conditioning.getText().toString().trim();
+                    Log.v("tagvv", " " + AC);
+
+                    int selectedId7 = rbTransmission.getCheckedRadioButtonId();
+                    btn_Transmission = findViewById(selectedId7);
+                    String Transmission = btn_Transmission.getText().toString().trim();
+                    Log.v("tagvv", " " + Transmission);
+
+                    int selectedId8 = rbpowerwindow.getCheckedRadioButtonId();
+                    btn_powerwindow = findViewById(selectedId8);
+                    String Power_Window = btn_powerwindow.getText().toString().trim();
+                    Log.v("tagvv", " " + Power_Window);
+
+                    int selectedId9 = rb_bssenser.getCheckedRadioButtonId();
+                    btn__bssenser = findViewById(selectedId9);
+                    String Blind_Spot_Senser = btn__bssenser.getText().toString().trim();
+                    Log.v("tagvv", " " + Blind_Spot_Senser);
+
+                    int selectedId10 = rbsroof.getCheckedRadioButtonId();
+                    btn_sroof = findViewById(selectedId10);
+                    String Sun_Roof = btn_sroof.getText().toString().trim();
+                    Log.v("tagvv", " " + Sun_Roof);
+
+                    int selectedId11 = rbaids.getCheckedRadioButtonId();
+                    btn_aids = findViewById(selectedId11);
+                    String Visual_Aids = btn_aids.getText().toString().trim();
+                    Log.v("tagvv", " " + Visual_Aids);
+
+                    int selectedId12 = rbcondition.getCheckedRadioButtonId();
+                    btn_condition = findViewById(selectedId12);
+                    String Conditon = btn_condition.getText().toString().trim();
+                    Log.v("tagvv", " " + Conditon);
+
+
+                    auth = FirebaseAuth.getInstance();
+                    FirebaseUser firebaseUser = auth.getCurrentUser();
+                    String uid = firebaseUser.getUid();
+                    Log.v("tagvv", " " + uid);
+
+
+                    Map<String, Object> userMap = new HashMap<>();
+                    userMap.put("UserID", uid);
+                    userMap.put("Model", Model);
+                    userMap.put("Description", Description);
+                    userMap.put("Amount", Amount);
+                    userMap.put("Address", Address);
+                    userMap.put("PhoneNumber", PhoneNumber);
+                    userMap.put("Seaters", Seaters);
+                    userMap.put("Classification", Classification);
+                    userMap.put("Color", Color);
+                    userMap.put("Power", Power);
+                    userMap.put("Year", Year);
+                    userMap.put("Gps", Gps);
+                    userMap.put("AirBags", AirBags);
+                    userMap.put("Parking_Sensor", Parking_Sensor);
+                    userMap.put("Fuel_type", Fuel_type);
+                    userMap.put("Bluetooth", Bluetooth);
+                    userMap.put("AC", AC);
+                    userMap.put("Transmission", Transmission);
+                    userMap.put("Power_Window", Power_Window);
+                    userMap.put("Blind_Spot_Senser", Blind_Spot_Senser);
+                    userMap.put("Sun_Roof", Sun_Roof);
+                    userMap.put("Visual_Aids", Visual_Aids);
+                    userMap.put("Conditon", Conditon);
+
+                    fstore.collection("Car").document(doc_id)
+                            .set(userMap)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    if (changed) {
+                                        uploadImage((doc_id));
+                                    }
+                                    Log.d("TAG", "DocumentSnapshot successfully written!");
+                                    SystemClock.sleep(3000);
+                                    Toast.makeText(UpdateAd.this, "Post Updated Successfully", Toast.LENGTH_SHORT).show();
+                                    pd.dismiss();
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("TAG", "Error writing document", e);
+                                }
+                            });
+
+
+
+                }
 
             }
         });
@@ -282,7 +472,7 @@ public class UpdateAd extends AppCompatActivity {
                             RadioButton rb2 = findViewById(R.id.aidsno);
                             rb2.setChecked(true);
                         }
-                        if (Condition1.equals("Yes")) {
+                        if (Condition1.equals("New")) {
                             RadioButton rb1 = findViewById(R.id.new_car);
                             rb1.setChecked(true);
                         } else {
@@ -351,7 +541,7 @@ public class UpdateAd extends AppCompatActivity {
 
     private void delete() {
         fstore = FirebaseFirestore.getInstance();
-        DocumentReference docRef = fstore.collection("Apartment").document(doc_id);
+        DocumentReference docRef = fstore.collection("Car").document(doc_id);
         docRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

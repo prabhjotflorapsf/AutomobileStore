@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
         HorizontalRecycler = v.findViewById(R.id.rv_hcar);
         VerticalRecycler = v.findViewById(R.id.rv_vcar);
 
-        RefreshData();
+        //RefreshData();
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
 //                popUpClass.showPopupWindow(v);
                 Intent i = new Intent(getActivity().getApplicationContext(), PostAd.class);
                 startActivity(i);
-                RefreshData();
+               // RefreshData();
 
             }
         });
@@ -181,12 +181,12 @@ public class HomeFragment extends Fragment {
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
                 Log.d("TAG", "image got"+Conditon);
-                if(Conditon.equals("yes")||Conditon.equals("Yes")){
+                if(Conditon.equals("New")||Conditon.equals("Yes")){
                     HorizontalList.add(new HorizontalCarData(UserID,Model, Amount, uri));
                     HorizontalAdapter.notifyDataSetChanged();
                 }
                 else{
-                    if (Conditon=="yes"||Conditon=="Yes"){
+                    if (Conditon=="New"||Conditon=="Yes"){
                         VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,"NEW"));
                     }else{
                         VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,"OlD"));
@@ -213,6 +213,11 @@ public class HomeFragment extends Fragment {
 
 
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        RefreshData();
     }
 
 

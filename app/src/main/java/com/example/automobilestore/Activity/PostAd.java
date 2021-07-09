@@ -298,11 +298,11 @@ public class PostAd extends AppCompatActivity {
                     userMap.put("Sun_Roof", Sun_Roof);
                     userMap.put("Visual_Aids", Visual_Aids);
                     userMap.put("Conditon", Conditon);
-
+                    Log.d("Demoooooooo1o1", "onSuccess: "+Conditon);
                     fstore.collection("Car").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d("Demoooooooo1o1", "onSuccess: "+documentReference.getId());
+
                             uploadImage((String) documentReference.getId());
                             Toast.makeText(PostAd.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
                             pd.dismiss();

@@ -7,33 +7,20 @@
     android:layout_height="match_parent"
     >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="#272670">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="55dp"
-            android:src="@drawable/logo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="AutoMotive"
-            android:textColor="#ffffff"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-    </androidx.appcompat.widget.Toolbar>
-
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="144dp"
+        android:layout_height="140dp"
         android:layout_gravity="center"
-        android:src="@drawable/logo" />
+        android:src="@drawable/ic_baseline_admin_panel_settings_24" />
+    <TextView
+       android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:text="Hello Admin !"
+       android:textSize="22dp"
+        android:layout_gravity="center"
+       android:textColor="#272670"
+      android:textStyle="bold"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/admin_email"
@@ -44,7 +31,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="#ffffff"
@@ -62,7 +49,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_height="55dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="#ffffff"
@@ -70,7 +57,7 @@
 
         <Button
             android:id="@+id/adminlogin"
-            android:layout_width="match_parent"
+            android:layout_width="111dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"

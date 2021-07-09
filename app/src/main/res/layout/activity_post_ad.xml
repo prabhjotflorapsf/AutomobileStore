@@ -963,7 +963,8 @@
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#272670"
                 android:singleLine="true"
-                android:text="@string/post_ad" />
+                android:text="@string/post_ad"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
 

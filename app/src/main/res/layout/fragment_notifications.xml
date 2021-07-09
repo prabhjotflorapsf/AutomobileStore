@@ -79,7 +79,8 @@
             android:layout_marginRight="10dp"
             android:backgroundTint="#272670"
             android:singleLine="true"
-            android:text="Login" />
+            android:text="Login"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/create"
@@ -91,7 +92,8 @@
             android:text="Create Account"
             android:textColor="#272670"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/forgotpass"
@@ -102,7 +104,8 @@
             android:text="Forgot Password?"
             android:textColor="#272670"
             android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAllCaps="false" />
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -125,7 +128,8 @@
             android:text="Admin SignIn"
             android:textColor="#272670"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAllCaps="false" />
 
 
     </LinearLayout>

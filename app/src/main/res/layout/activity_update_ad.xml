@@ -949,7 +949,8 @@
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#3cb6d3"
                 android:singleLine="true"
-                android:text="update_ad" />
+                android:text="update_ad"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 

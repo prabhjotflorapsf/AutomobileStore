@@ -28,6 +28,7 @@ public class ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+
         final FirebaseAuth auth = FirebaseAuth.getInstance();
         email = findViewById(R.id.resetemail);
         reset = findViewById(R.id.resetpassword);
@@ -36,6 +37,12 @@ public class ForgotPassword extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 emailAddress = email.getEditText().getText().toString();
+
+                if(emailAddress.isEmpty()){
+                    email.setError("Email is required!");
+                    email.requestFocus();
+                    return;
+                }
 
                 if (!isEmailValid(emailAddress)) {
                     Toast.makeText(ForgotPassword.this, "Please enter valid email ", Toast.LENGTH_LONG).show();

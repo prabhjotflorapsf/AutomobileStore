@@ -25,13 +25,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/admin_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="69dp"
         android:layout_marginTop="10dp"
         android:hint="Email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="#ffffff"
@@ -42,14 +42,14 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/admin_password"
         android:layout_width="match_parent"
-        android:layout_height="287dp"
+        android:layout_height="372dp"
         android:layout_marginTop="15dp"
         android:hint="Password"
         app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="75dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="#ffffff"

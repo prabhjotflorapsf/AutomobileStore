@@ -94,7 +94,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:backgroundTint="#272670"
-        android:text="@string/update_profile" />
+        android:text="@string/update_profile"
+        android:textAllCaps="false"/>
 
 
 </LinearLayout>

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.automobilestore">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -17,9 +27,9 @@
         <activity android:name=".Admin.admin_signin" />
         <activity android:name=".Admin.AdminHome" />
         <activity android:name=".Activity.PostList" />
-        <activity android:name=".Activity.PostList" />
+<!--        <activity android:name=".Activity.PostList" />-->
         <activity android:name=".Activity.Filter" />
-        <activity android:name=".Admin.admin_signin" />
+<!--        <activity android:name=".Admin.admin_signin" />-->
         <activity android:name=".Activity.ProfileDetails" />
         <activity android:name=".Activity.PostAd" /> <!-- <activity android:name=".Activity.SplashScreen"></activity> -->
         <activity android:name=".Activity.ForgotPassword" />

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.automobilestore.Fragment.ui.MyAccountFragment;
-import com.example.automobilestore.Fragment.ui.dashboard.DashboardFragment;
+import com.example.automobilestore.Fragment.ui.dashboard.WishlistFragment;
 import com.example.automobilestore.Fragment.ui.home.HomeFragment;
 import com.example.automobilestore.Fragment.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,13 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.automobilestore.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    final Fragment Dashboard = new DashboardFragment();
+    final Fragment Dashboard = new WishlistFragment();
     final Fragment home = new HomeFragment();
     final Fragment account = new MyAccountFragment();
     final Fragment profile = new NotificationsFragment();

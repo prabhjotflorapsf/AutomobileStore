@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.automobilestore.Fragment.ui.SpecsFragment;
+import com.example.automobilestore.Fragment.ui.overviewFragment;
 import com.example.automobilestore.R;
 import com.example.automobilestore.adapter.ViewImagePagerAdapter;
 import com.example.automobilestore.adapter.ViewPagerAdapter;
@@ -118,6 +119,7 @@ public class CarDetails extends AppCompatActivity {
                 }
                 if (curUser != null) {
                     UserId = curUser.getUid();
+
                     if (wishlisted) {
                         fstore.collection("Wishlist").document(WishlistedId)
                                 .delete()
@@ -149,7 +151,7 @@ public class CarDetails extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         CarDialog alert = new CarDialog();
-                                        alert.showLoginDialog(CarDetails.this);
+                                        //alert.showLoginDialog(CarDetails.this);
                                         Log.d("TAG", "DocumentSnapshot written with ID: " + documentReference.getId());
                                         Toast.makeText(CarDetails.this, "Added to Wishlist", Toast.LENGTH_SHORT).show();
                                         like.setImageResource(R.drawable.wishlisticon);
@@ -166,6 +168,7 @@ public class CarDetails extends AppCompatActivity {
                     }
 
                 } else {
+
                     CarDialog alert = new CarDialog();
                     alert.showLoginDialog(CarDetails.this);
 
@@ -175,9 +178,9 @@ public class CarDetails extends AppCompatActivity {
 
     }
 
-    private void checkWishlist(String aptId, final ImageView like) {
+    private void checkWishlist(String Id, final ImageView like) {
         fstore.collection("Wishlist")
-                .whereEqualTo("Filter", UserId + "_" + aptId)
+                .whereEqualTo("Filter", UserId + "_" + Id)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -291,9 +294,8 @@ public class CarDetails extends AppCompatActivity {
             @Override
             public void run() {
 
-//                viewPagerAdapter.addFragment(overviewFragment.getInstance(aptId), "OVERVIEW");
-//                viewPagerAdapter.addFragment(theunitFragment.getInstance(aptId), "THE UNIT");
-//                viewPagerAdapter.addFragment(thebuildingFragment.getInstance(aptId), "THE BUILDING");
+                viewPagerAdapter.addFragment(overviewFragment.getInstance(docid), "OVERVIEW");
+
                 viewPagerAdapter.addFragment(SpecsFragment.getInstance(docid), "SPECIFICATION");
                 viewPager.setAdapter(viewPagerAdapter);
                 tabLayout.setupWithViewPager(viewPager);

@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 public class admin_signin extends AppCompatActivity {
 
     public TextInputLayout Email, Password;
-    Button login, signup,forgotpassword;
+    Button login,forgotpassword;
     private FirebaseAuth auth;
     FirebaseFirestore fStore;
 
@@ -35,11 +35,8 @@ public class admin_signin extends AppCompatActivity {
         Email = findViewById(R.id.admin_email);
         Password = findViewById(R.id.admin_password);
         login = findViewById(R.id.adminlogin);
-        signup = findViewById(R.id.admin_create);
         forgotpassword = findViewById(R.id.admin_forgotpass);
-
         auth = FirebaseAuth.getInstance();
-
         fStore = FirebaseFirestore.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +44,6 @@ public class admin_signin extends AppCompatActivity {
             public void onClick(View v) {
                 String email = Email.getEditText().getText().toString();
                 String pwd = Password.getEditText().getText().toString();
-
 
                 Task<QuerySnapshot> documentReference = fStore.collection("Admin").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -70,13 +66,6 @@ public class admin_signin extends AppCompatActivity {
                     }
                 });
 
-            }
-        });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), admin_signup.class);
-                startActivity(i);
             }
         });
         forgotpassword.setOnClickListener(new View.OnClickListener() {

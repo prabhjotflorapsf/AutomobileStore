@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
         <activity android:name=".Activity.admin_forgotpassword"></activity>
-        <activity android:name=".Activity.admin_signup" />
         <activity android:name=".Activity.Contact"></activity>
         <activity android:name=".Activity.CarDialog" />
         <activity android:name=".Activity.CarDetails" />

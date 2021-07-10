@@ -71,18 +71,6 @@
             android:textAllCaps="false"/>
 
         <Button
-            android:id="@+id/admin_create"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="New Admin? Register here"
-            android:textColor="#272670"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <Button
             android:id="@+id/admin_forgotpass"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"

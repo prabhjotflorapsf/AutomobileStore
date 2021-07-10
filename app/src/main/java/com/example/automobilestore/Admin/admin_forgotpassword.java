@@ -1,4 +1,4 @@
-package com.example.automobilestore.Activity;
+package com.example.automobilestore.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

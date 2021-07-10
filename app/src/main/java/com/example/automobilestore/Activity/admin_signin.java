@@ -67,7 +67,7 @@ public class admin_signin extends AppCompatActivity {
                                     startActivity(new Intent(admin_signin.this,AdminHome.class));
                                 }else if(!e.equalsIgnoreCase(email)){
                                     Email.requestFocus();
-                                    Email.setError("User Does not Exists with this email");
+                                    Email.setError("Sorry!! These are not Admin Sign In Credentials.");
                                 }else if(!p.equalsIgnoreCase(pwd)){
                                     Password.requestFocus();
                                     Password.setError("Incorrect Password");

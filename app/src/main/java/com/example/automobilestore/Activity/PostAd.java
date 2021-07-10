@@ -24,7 +24,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.automobilestore.Fragment.ui.home.HomeFragment;
 import com.example.automobilestore.R;
+import com.example.automobilestore.adapter.Horizontal_Car_Adapter;
+import com.example.automobilestore.adapter.Vertical_Car_Adapter;
 import com.example.automobilestore.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,6 +53,8 @@ public class PostAd extends AppCompatActivity {
     ImageView selectedImage, selectedImage1, selectedImage2, selectedImage3, upload;
     ImageView[] image;
     FirebaseStorage storage;
+    Vertical_Car_Adapter VerticalAdapter;
+    Horizontal_Car_Adapter HorizontalAdapter;
     StorageReference storageReference;
     ArrayList<Uri> contenturi = new ArrayList<Uri>();
     private TextInputLayout et_model,et_address, et_description, et_amount, et_phone_number, et_seaters, et_Car_Classification, et_color, et_power, et_year;
@@ -93,7 +98,7 @@ public class PostAd extends AppCompatActivity {
         AutoCompleteTextView Car_Classification=findViewById(R.id.et_Car_Classification);
         AutoCompleteTextView car_color=findViewById(R.id.et_color);
         AutoCompleteTextView car_year=findViewById(R.id.et_year);
-        String[] seater = new String[]{"2 Passenger", "4 Passenger", "6 Passenger","8 Passenger","10 Passenger"};
+        String[] seater = new String[]{"2", "4", "6","8","10"};
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(
                 PostAd.this,
@@ -257,7 +262,7 @@ public class PostAd extends AppCompatActivity {
                     String Visual_Aids = btn_aids.getText().toString().trim();
                     Log.v("tagvv", " " +Visual_Aids);
 
-                    int selectedId12 = rbaids.getCheckedRadioButtonId();
+                    int selectedId12 = rbcondition.getCheckedRadioButtonId();
                     btn_condition = findViewById(selectedId12);
                     String Conditon = btn_condition.getText().toString().trim();
                     Log.v("tagvv", " " +Conditon);
@@ -293,7 +298,7 @@ public class PostAd extends AppCompatActivity {
                     userMap.put("Sun_Roof", Sun_Roof);
                     userMap.put("Visual_Aids", Visual_Aids);
                     userMap.put("Conditon", Conditon);
-
+                    Log.d("Demoooooooo1o1", "onSuccess: "+Conditon);
                     fstore.collection("Car").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -301,7 +306,9 @@ public class PostAd extends AppCompatActivity {
                             uploadImage((String) documentReference.getId());
                             Toast.makeText(PostAd.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
                             pd.dismiss();
+
                             finish();
+
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -312,6 +319,7 @@ public class PostAd extends AppCompatActivity {
                             Toast.makeText(PostAd.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
                         }
                     });
+
 
                 }
 
@@ -393,5 +401,4 @@ public class PostAd extends AppCompatActivity {
         }
 
     }
-
 }

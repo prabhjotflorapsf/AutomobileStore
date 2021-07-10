@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
         HorizontalRecycler = v.findViewById(R.id.rv_hcar);
         VerticalRecycler = v.findViewById(R.id.rv_vcar);
 
-        RefreshData();
+        //RefreshData();
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +82,7 @@ public class HomeFragment extends Fragment {
 //                popUpClass.showPopupWindow(v);
                 Intent i = new Intent(getActivity().getApplicationContext(), PostAd.class);
                 startActivity(i);
+               // RefreshData();
 
             }
         });
@@ -97,7 +98,7 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
-    private void RefreshData() {
+    public void RefreshData() {
 
 //
 //        HorizontalList.add(new HorizontalCarData("Honda", "$19000", R.drawable.logo));
@@ -179,16 +180,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
-                Log.d("TAG", "image got");
-                if(Conditon.equals("yes")||Conditon.equals("Yes")){
-                    HorizontalList.add(new HorizontalCarData(Model, Amount, uri));
+                Log.d("TAG", "image got"+Conditon);
+                if(Conditon.equals("New")||Conditon.equals("Yes")){
+                    HorizontalList.add(new HorizontalCarData(UserID,Model, Amount, uri));
                     HorizontalAdapter.notifyDataSetChanged();
                 }
                 else{
-                    if (Conditon=="yes"||Conditon=="Yes"){
-                        VerticalList.add(new VerticalCarData(Model, Amount,uri,"NEW"));
+                    if (Conditon=="New"||Conditon=="Yes"){
+                        VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,"NEW"));
                     }else{
-                        VerticalList.add(new VerticalCarData(Model, Amount,uri,"OlD"));
+                        VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,"OlD"));
                     }
 
                     setVertical();
@@ -212,6 +213,11 @@ public class HomeFragment extends Fragment {
 
 
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        RefreshData();
     }
 
 
@@ -369,7 +375,7 @@ public class HomeFragment extends Fragment {
         });
 
     }
-    private void FilterData() {
+    public void FilterData() {
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -389,10 +395,13 @@ public class HomeFragment extends Fragment {
                                 Log.d("Filterrrrrr Data", "filter calll") ;
                                 Log.d("", document.getId() + " => " + document.getData());
                                 System.out.println(document.getId() + " => " + document.getData());
+                                Log.d("Filterrrrrr Data", "filter calll2") ;
                                 String Model = (String) document.getData().get("Model");
                                 Float Amount = Float.parseFloat(String.valueOf(document.getData().get("Amount")));
                                 String Conditon=(String) document.getData().get("Conditon");
+                                Log.d("Filterrrrrr Data", "filter calll3") ;
                                 int Seaters=Integer.parseInt(String.valueOf(document.getData().get("Seaters")));
+                                Log.d("Filterrrrrr Data", "filter calll4") ;
                                 String UserID=document.getId();
 
 

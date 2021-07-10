@@ -6,6 +6,17 @@ public class HorizontalCarData {
 
     String name;
     String price;
+    private Uri imageUrl;
+    String id;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
 
     public Uri getImageUrl() {
         return imageUrl;
@@ -15,15 +26,16 @@ public class HorizontalCarData {
         this.imageUrl = imageUrl;
     }
 
-    private Uri imageUrl;
 
 
 
 
-    public HorizontalCarData(String name, String price,  Uri imageUrl) {
+
+    public HorizontalCarData(String id,String name, String price,  Uri imageUrl) {
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.id=id;
     }
 
     public String getName() {

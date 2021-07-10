@@ -137,7 +137,8 @@
 
         android:backgroundTint="#272670"
         android:singleLine="true"
-        android:text="Create Account" />
+        android:text="Create Account"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/login_btn"
@@ -149,6 +150,7 @@
         android:text="Login"
         android:textColor="#272670"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textAllCaps="false"/>
 
 </LinearLayout>

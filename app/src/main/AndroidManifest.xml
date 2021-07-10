@@ -11,6 +11,10 @@
         android:theme="@style/Theme.AutomobileStore">
         <activity android:name=".admin_forgotpassword"></activity>
         <activity android:name=".admin_signup" />
+        <activity android:name=".Activity.Contact"></activity>
+        <activity android:name=".Activity.CarDialog" />
+        <activity android:name=".Activity.CarDetails" />
+        <activity android:name=".Activity.UpdateAd" />
         <activity android:name=".Activity.admin_signin" />
         <activity android:name=".Activity.AdminHome" />
         <activity android:name=".Activity.PostList" />

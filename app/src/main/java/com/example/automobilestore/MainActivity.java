@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if (savedInstanceState == null) {
-            bottomNavigationView.setSelectedItemId(R.id.navigation_notifications);
+            bottomNavigationView.setSelectedItemId(R.id.navigation_home);
         }
 
 

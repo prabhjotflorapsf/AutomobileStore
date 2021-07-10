@@ -27,9 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="69dp"
         android:layout_marginTop="10dp"
-        android:hint="Email">
+        android:hint="Admin Email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/adminEmailTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -44,10 +45,11 @@
         android:layout_width="match_parent"
         android:layout_height="372dp"
         android:layout_marginTop="15dp"
-        android:hint="Password"
+        android:hint="Admin Password"
         app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/adminPasswordTextView"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -65,7 +67,8 @@
             android:layout_marginRight="10dp"
             android:backgroundTint="#272670"
             android:singleLine="true"
-            android:text="SignIn" />
+            android:text="Sign In"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/admin_create"

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.automobilestore.Fragment.ui.SpecsFragment;
 import com.example.automobilestore.R;
 import com.example.automobilestore.adapter.ViewImagePagerAdapter;
 import com.example.automobilestore.adapter.ViewPagerAdapter;
@@ -283,7 +284,7 @@ public class CarDetails extends AppCompatActivity {
     }
 
 
-    public void getTabs(final String aptId) {
+    public void getTabs(final String docid) {
         final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         new Handler().post(new Runnable() {
@@ -293,9 +294,9 @@ public class CarDetails extends AppCompatActivity {
 //                viewPagerAdapter.addFragment(overviewFragment.getInstance(aptId), "OVERVIEW");
 //                viewPagerAdapter.addFragment(theunitFragment.getInstance(aptId), "THE UNIT");
 //                viewPagerAdapter.addFragment(thebuildingFragment.getInstance(aptId), "THE BUILDING");
-//                viewPagerAdapter.addFragment(accessibilityfragment.getInstance(aptId), "ACCESSIBILITY");
-//                viewPager.setAdapter(viewPagerAdapter);
-//                tabLayout.setupWithViewPager(viewPager);
+                viewPagerAdapter.addFragment(SpecsFragment.getInstance(docid), "SPECIFICATION");
+                viewPager.setAdapter(viewPagerAdapter);
+                tabLayout.setupWithViewPager(viewPager);
             }
         });
     }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -105,7 +106,17 @@ public class CarDetails extends AppCompatActivity {
         btnbuyCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CarDetails.this, "hello buy it", Toast.LENGTH_SHORT).show();
+                auth = FirebaseAuth.getInstance();
+                fstore = FirebaseFirestore.getInstance();
+                curUser = auth.getCurrentUser();
+                if (curUser != null) {
+                    Intent i = new Intent(getApplicationContext(), Contact.class);
+                    i.putExtra("Uid", Uid);
+                    startActivity(i);
+                } else {
+                    CarDialog alert = new CarDialog();
+                    alert.showLoginDialog(CarDetails.this);
+                }
             }
         });
         like.setOnClickListener(new View.OnClickListener() {

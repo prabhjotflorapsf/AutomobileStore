@@ -43,6 +43,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.ContentValues.TAG;
+
 public class CarDetails extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -305,9 +307,10 @@ public class CarDetails extends AppCompatActivity {
             @Override
             public void run() {
 
-                viewPagerAdapter.addFragment(overviewFragment.getInstance(docid), "OVERVIEW");
+                Log.d(TAG, "run: sssssss");
 
                 viewPagerAdapter.addFragment(SpecsFragment.getInstance(docid), "SPECIFICATION");
+                viewPagerAdapter.addFragment(overviewFragment.getInstance(docid), "OVERVIEW");
                 viewPager.setAdapter(viewPagerAdapter);
                 tabLayout.setupWithViewPager(viewPager);
             }

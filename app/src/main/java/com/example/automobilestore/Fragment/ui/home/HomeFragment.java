@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.automobilestore.Activity.CarDialog;
 import com.example.automobilestore.Activity.PostAd;
 import com.example.automobilestore.R;
 import com.example.automobilestore.adapter.Vertical_Car_Adapter;
@@ -62,8 +63,9 @@ public class HomeFragment extends Fragment {
     boolean passengerChanged = false;
     ImageView filter;
     float min = 0, max = 100000;
-    float minp = 1, maxp = 8;
-
+    float minp = 1, maxp = 10;
+    String UserId;
+    FirebaseFirestore fstore;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -72,17 +74,31 @@ public class HomeFragment extends Fragment {
         add_btn=v.findViewById(R.id.add_post_btn);
         HorizontalRecycler = v.findViewById(R.id.rv_hcar);
         VerticalRecycler = v.findViewById(R.id.rv_vcar);
+        auth = FirebaseAuth.getInstance();
 
-        //RefreshData();
+//        RefreshData();
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                PopUpClass popUpClass = new PopUpClass();
 //                popUpClass.showPopupWindow(v);
+                fstore = FirebaseFirestore.getInstance();
+                curUser = auth.getCurrentUser();
+                if (curUser != null) {
+                    UserId = curUser.getUid();
+                }
+                if (curUser != null) {
+                    UserId = curUser.getUid();
                 Intent i = new Intent(getActivity().getApplicationContext(), PostAd.class);
                 startActivity(i);
                // RefreshData();
+                } else {
+
+                    CarDialog alert = new CarDialog();
+                    alert.showLoginDialog(getActivity());
+
+                }
 
             }
         });
@@ -210,13 +226,14 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+//        RefreshData();
 
 
     }
     @Override
     public void onResume() {
         super.onResume();
+
         RefreshData();
     }
 
@@ -365,7 +382,7 @@ public class HomeFragment extends Fragment {
                 priceChanged = false;
 
                 minp = 1;
-                maxp = 8;
+                maxp = 10;
                 toSeaters.setText("Min " + minp);
                 fromSeaters.setText("Max " + maxp);
                 passengerChanged = false;

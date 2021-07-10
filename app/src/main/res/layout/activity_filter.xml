@@ -60,7 +60,7 @@
         android:layout_below="@+id/from"
         android:stepSize="1"
         android:valueFrom="1"
-        android:valueTo="8"
+        android:valueTo="10"
         app:labelBehavior="withinBounds"
         app:values="@array/passenger_slider_values" />
 
@@ -81,7 +81,7 @@
         android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/toSeaters"
         android:gravity="right"
-        android:text="Max 8"></TextView>
+        android:text="Max 10"></TextView>
 
     <LinearLayout
         android:layout_width="match_parent"

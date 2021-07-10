@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.automobilestore.R;
+import com.example.automobilestore.admin_forgotpassword;
+import com.example.automobilestore.admin_signup;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -27,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 public class admin_signin extends AppCompatActivity {
 
     public TextInputLayout Email, Password;
-    Button login;
+    Button login, signup,forgotpassword;
     private FirebaseAuth auth;
     FirebaseFirestore fStore;
 
@@ -40,6 +42,8 @@ public class admin_signin extends AppCompatActivity {
         Email = findViewById(R.id.admin_email);
         Password = findViewById(R.id.admin_password);
         login = findViewById(R.id.adminlogin);
+        signup = findViewById(R.id.admin_create);
+        forgotpassword = findViewById(R.id.admin_forgotpass);
 
         auth = FirebaseAuth.getInstance();
 
@@ -73,6 +77,20 @@ public class admin_signin extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), admin_signup.class);
+                startActivity(i);
+            }
+        });
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), admin_forgotpassword.class);
+                startActivity(i);
             }
         });
     }

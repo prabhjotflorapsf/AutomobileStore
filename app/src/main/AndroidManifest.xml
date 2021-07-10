@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
+        <activity android:name=".admin_forgotpassword"></activity>
+        <activity android:name=".admin_signup" />
         <activity android:name=".Activity.Contact"></activity>
         <activity android:name=".Activity.CarDialog" />
         <activity android:name=".Activity.CarDetails" />

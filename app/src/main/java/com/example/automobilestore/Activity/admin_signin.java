@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,6 +19,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
+
+import static android.content.ContentValues.TAG;
 
 public class admin_signin extends AppCompatActivity {
 
@@ -52,8 +55,13 @@ public class admin_signin extends AppCompatActivity {
                             for(QueryDocumentSnapshot doc:task.getResult()){
                                 String e = doc.getString("Email");
                                 String p = doc.getString("Password");
+                                Log.d(TAG, "onComplete admin: ");
                                 if (e.equalsIgnoreCase(email) && p.equalsIgnoreCase(pwd)){
-                                    startActivity(new Intent(admin_signin.this,AdminHome.class));
+                                    //startActivity(new Intent(admin_signin.this,AdminHome.class));
+
+                                    Intent i = new Intent(admin_signin.this, AdminHome.class);
+                                    startActivity(i);
+
                                 }else if(!e.equalsIgnoreCase(email)){
                                     Email.requestFocus();
                                     Email.setError("Sorry!! These are not Admin Sign In Credentials.");

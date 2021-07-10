@@ -54,8 +54,8 @@ public class admin_signin extends AppCompatActivity {
                     public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot doc:task.getResult()){
-                                String e = doc.getString("email");
-                                String p = doc.getString("password");
+                                String e = doc.getString("Email");
+                                String p = doc.getString("Password");
                                 if (e.equalsIgnoreCase(email) && p.equalsIgnoreCase(pwd)){
                                     startActivity(new Intent(admin_signin.this,AdminHome.class));
                                 }else if(!e.equalsIgnoreCase(email)){

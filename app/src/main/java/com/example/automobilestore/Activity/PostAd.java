@@ -50,8 +50,6 @@ public class PostAd extends AppCompatActivity {
     final int GALLERY_REQUEST_CODE = 105;
     FirebaseFirestore fstore;
     FirebaseAuth auth;
-    private FirebaseUser curUser;
-
     ImageView selectedImage, selectedImage1, selectedImage2, selectedImage3, upload;
     ImageView[] image;
     FirebaseStorage storage;
@@ -102,7 +100,6 @@ public class PostAd extends AppCompatActivity {
         AutoCompleteTextView car_year=findViewById(R.id.et_year);
         String[] seater = new String[]{"2", "4", "6","8","10"};
 
-
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(
                 PostAd.this,
                 R.layout.dropdown_item,
@@ -143,9 +140,7 @@ public class PostAd extends AppCompatActivity {
         btn_postad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
+                fstore = FirebaseFirestore.getInstance();
                 final String Model = et_model.getEditText().getText().toString().trim();
                 final String Description = et_description.getEditText().getText().toString().trim();
                 final String Address = et_address.getEditText().getText().toString().trim();
@@ -303,11 +298,11 @@ public class PostAd extends AppCompatActivity {
                     userMap.put("Sun_Roof", Sun_Roof);
                     userMap.put("Visual_Aids", Visual_Aids);
                     userMap.put("Conditon", Conditon);
-                    Log.d("Demoooooooo1o1", "onSuccess: "+Conditon);
+
                     fstore.collection("Car").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-
+                            Log.d("Demoooooooo1o1", "onSuccess: "+documentReference.getId());
                             uploadImage((String) documentReference.getId());
                             Toast.makeText(PostAd.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
                             pd.dismiss();
@@ -327,7 +322,6 @@ public class PostAd extends AppCompatActivity {
 
 
                 }
-
 
             }
         });

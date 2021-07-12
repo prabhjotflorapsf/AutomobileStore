@@ -35,7 +35,7 @@
                 android:layout_width="44dp"
                 android:layout_height="41dp"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/logout" />
+                android:src="@drawable/ic_baseline_power_settings_new_24" />
 
             <TextView
                 android:layout_width="wrap_content"

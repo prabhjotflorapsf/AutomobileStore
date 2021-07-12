@@ -148,8 +148,8 @@ public class UpdateAd extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int item) {
                         if (options[item].equals("Delete")) {
                             delete();
-//                            HomeFragment hm = new HomeFragment();
-//                            hm.RefreshData();
+                            HomeFragment hm = new HomeFragment();
+                            hm.RefreshData();
                         } else if (options[item].equals("Cancel")) {
                             dialog.dismiss();
                         }

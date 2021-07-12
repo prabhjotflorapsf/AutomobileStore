@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.automobilestore">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -19,17 +20,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
-        <activity android:name=".Admin.admin_forgotpassword"></activity>
-        <activity android:name=".Activity.Contact"></activity>
+        <activity android:name=".Admin_Profile"></activity>
+        <activity android:name=".Admin.admin_forgotpassword" />
+        <activity android:name=".Activity.Contact" />
         <activity android:name=".Activity.CarDialog" />
         <activity android:name=".Activity.CarDetails" />
         <activity android:name=".Activity.UpdateAd" />
         <activity android:name=".Admin.admin_signin" />
         <activity android:name=".Admin.AdminHome" />
-        <activity android:name=".Activity.PostList" />
-<!--        <activity android:name=".Activity.PostList" />-->
-        <activity android:name=".Activity.Filter" />
-<!--        <activity android:name=".Admin.admin_signin" />-->
+        <activity android:name=".Activity.PostList" /> <!-- <activity android:name=".Activity.PostList" /> -->
+        <activity android:name=".Activity.Filter" /> <!-- <activity android:name=".Admin.admin_signin" /> -->
         <activity android:name=".Activity.ProfileDetails" />
         <activity android:name=".Activity.PostAd" /> <!-- <activity android:name=".Activity.SplashScreen"></activity> -->
         <activity android:name=".Activity.ForgotPassword" />

@@ -71,20 +71,32 @@
         android:layout_marginBottom="-6dp"
         android:background="@drawable/layout_bg">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_hcar"
-            android:layout_width="390dp"
-            android:layout_height="211dp"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
+            android:layout_width="393dp"
+            android:layout_height="194dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.098" />
+            app:layout_constraintVertical_bias="0.112">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_hcar"
+                android:layout_width="390dp"
+                android:layout_height="211dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.098" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_vcar"
-            android:layout_width="406dp"
-            android:layout_height="316dp"
+            android:layout_width="400dp"
+            android:layout_height="373dp"
             android:layout_marginStart="1dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="1dp"
@@ -92,7 +104,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_hcar" />
+            app:layout_constraintTop_toBottomOf="@+id/swipeContainer"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

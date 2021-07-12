@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.automobilestore.Activity.CarDialog;
 import com.example.automobilestore.Activity.PostAd;
@@ -48,7 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    private FragmentHomeBinding binding;
+    
     FloatingActionButton add_btn;
     RecyclerView HorizontalRecycler, VerticalRecycler;
     Vertical_Car_Adapter VerticalAdapter;
@@ -66,6 +67,7 @@ public class HomeFragment extends Fragment {
     float minp = 1, maxp = 10;
     String UserId;
     FirebaseFirestore fstore;
+    SwipeRefreshLayout swipeContainer;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -76,7 +78,20 @@ public class HomeFragment extends Fragment {
         VerticalRecycler = v.findViewById(R.id.rv_vcar);
         auth = FirebaseAuth.getInstance();
 
-//        RefreshData();
+////        RefreshData();
+//         Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                RefreshData();
+                swipeContainer.setRefreshing(false);
+            }
+        });
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +130,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void RefreshData() {
-
+//        Toast.makeText(getActivity(), "cALLLLLLL", Toast.LENGTH_SHORT).show();
 //
 //        HorizontalList.add(new HorizontalCarData("Honda", "$19000", R.drawable.logo));
 //        HorizontalList.add(new HorizontalCarData("Hyundai", "$17000", R.drawable.logo));

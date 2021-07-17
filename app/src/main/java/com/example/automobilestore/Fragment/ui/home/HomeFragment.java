@@ -31,7 +31,7 @@ import com.example.automobilestore.Activity.PostAd;
 import com.example.automobilestore.R;
 import com.example.automobilestore.adapter.Vertical_Car_Adapter;
 import com.example.automobilestore.adapter.Horizontal_Car_Adapter;
-import com.example.automobilestore.databinding.FragmentHomeBinding;
+
 import com.example.automobilestore.model.VerticalCarData;
 import com.example.automobilestore.model.HorizontalCarData;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -89,6 +89,8 @@ public class HomeFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
 
 
+
+
 ////        RefreshData();
 //         Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
@@ -136,11 +138,12 @@ public class HomeFragment extends Fragment {
                 filter(getActivity());
             }
         });
+
         search.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-              
+
 
                 if(keyCode==KeyEvent.KEYCODE_DEL)
                 {

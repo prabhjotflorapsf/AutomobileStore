@@ -101,6 +101,7 @@ public class HomeFragment extends Fragment {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
+                search.setText("");
                 RefreshData();
                 swipeContainer.setRefreshing(false);
             }
@@ -147,7 +148,7 @@ public class HomeFragment extends Fragment {
 
                 if(keyCode==KeyEvent.KEYCODE_DEL)
                 {
-                    if(search.getText().toString().length()<=1) {
+                    if(search.getText().toString().length()==1) {
 //                        HorizontalList.clear();
                         RefreshData();
                     }else{

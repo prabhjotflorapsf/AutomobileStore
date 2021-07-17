@@ -54,7 +54,7 @@ public class admin_signin extends AppCompatActivity {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot doc:task.getResult()){
                                 String e = doc.getString("Email");
-                                String p = doc.getString("Password");
+                                String p = doc.getString(  "Password");
                                 Log.d(TAG, "onComplete admin: ");
                                 if (e.equalsIgnoreCase(email) && p.equalsIgnoreCase(pwd)){
                                     //startActivity(new Intent(admin_signin.this,AdminHome.class));

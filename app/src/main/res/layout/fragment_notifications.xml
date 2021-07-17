@@ -32,9 +32,10 @@
 <Space
     android:layout_width="wrap_content"
     android:layout_height="20dp"/>
+
     <ImageView
-        android:layout_width="212dp"
-        android:layout_height="180dp"
+        android:layout_width="187dp"
+        android:layout_height="156dp"
         android:layout_gravity="center"
         android:src="@drawable/logo" />
 
@@ -77,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
             android:backgroundTint="#272670"
             android:singleLine="true"
@@ -88,25 +89,25 @@
             android:id="@+id/create"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_gravity="center"
             android:text="Create Account"
+            android:textAllCaps="false"
             android:textColor="#272670"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:textAllCaps="false" />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/forgotpass"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_gravity="center"
             android:text="Forgot Password?"
+            android:textAllCaps="false"
             android:textColor="#272670"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:textAllCaps="false" />
+            android:textStyle="bold" />
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

@@ -9,40 +9,43 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="321dp"
+            android:id="@+id/welcome_admin"
+            android:layout_width="309dp"
             android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
-            android:text="   Welcome Admin!"
-            android:textColor="#272670"
+            android:text="Welcome Admin!"
+            android:textColor="#292871"
             android:textSize="25dp"
             android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_marginTop="5dp"
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#E4DFDF"
+            android:layout_marginTop="5dp"
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/logout_img"
                 android:layout_width="44dp"
                 android:layout_height="41dp"
                 android:layout_marginLeft="15dp"
                 android:src="@drawable/ic_baseline_power_settings_new_24" />
 
             <TextView
+                android:id="@+id/logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  Logout"
-                android:textColor="#272670"
-                android:textSize="18dp"
+                android:backgroundTint="#E4DFDF"
+                android:text="   Logout"
+                android:textColor="#292871"
+                android:textSize="15dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -50,9 +53,111 @@
 
     <LinearLayout
         android:layout_width="387dp"
-        android:layout_height="576dp"
+        android:layout_height="454dp"
         android:layout_gravity="center"
-        android:background="#272670">
+        android:layout_marginTop="20dp"
 
-    </LinearLayout>
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#292871"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="171dp"
+                    android:layout_height="155dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#E4DFDF"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="107dp"
+                        android:layout_height="99dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_baseline_group" />
+
+                    <TextView
+                        android:layout_width="112dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text="Users Log"
+                        android:textColor="#272670"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="171dp"
+                    android:layout_height="155dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#E4DFDF"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="97dp"
+                        android:layout_height="81dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="22dp"
+                        android:src="@drawable/ic_baseline_collections_24" />
+
+                    <TextView
+                        android:layout_width="112dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Posts Log"
+                        android:textColor="#272670"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="171dp"
+                    android:layout_height="155dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#E4DFDF"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="107dp"
+                        android:layout_height="99dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_baseline_add_photo" />
+
+                    <TextView
+                        android:layout_width="112dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:text="Add a post"
+                        android:textColor="#272670"
+                        android:textSize="20dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        </LinearLayout>
+
 </LinearLayout>

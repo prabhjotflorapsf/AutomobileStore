@@ -3,16 +3,19 @@ package com.example.automobilestore.Fragment.ui.home;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +43,7 @@ import com.google.android.material.slider.RangeSlider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -47,6 +51,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class HomeFragment extends Fragment {
     
@@ -68,15 +74,20 @@ public class HomeFragment extends Fragment {
     String UserId;
     FirebaseFirestore fstore;
     SwipeRefreshLayout swipeContainer;
+    EditText search;
+    int count=0;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         add_btn=v.findViewById(R.id.add_post_btn);
+        search=v.findViewById(R.id.search_et);
         HorizontalRecycler = v.findViewById(R.id.rv_hcar);
         VerticalRecycler = v.findViewById(R.id.rv_vcar);
         auth = FirebaseAuth.getInstance();
+
 
 ////        RefreshData();
 //         Lookup the swipe container view
@@ -92,6 +103,7 @@ public class HomeFragment extends Fragment {
                 swipeContainer.setRefreshing(false);
             }
         });
+
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,31 +136,88 @@ public class HomeFragment extends Fragment {
                 filter(getActivity());
             }
         });
+        search.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+              
+
+                if(keyCode==KeyEvent.KEYCODE_DEL)
+                {
+                    if(search.getText().toString().length()<=1) {
+//                        HorizontalList.clear();
+                        RefreshData();
+                    }else{
+                        Search(search.getText().toString());
+                    }
+                }
+                Search(search.getText().toString());
+
+                return false;
+            }
+        });
 
 
         return v;
     }
 
+    private void Search(String search_text) {
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        curUser = auth.getCurrentUser();
+
+
+        String userId = null;
+        if (curUser != null) {
+            userId = curUser.getUid(); //Do what you need to do with the id
+        }
+        String finalSearch_text = search_text.toLowerCase();
+
+        db.collection("Car")
+//                .whereGreaterThan("Amount",min).whereLessThan("Amount",max)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("search Data", "search calll");
+                                Log.d("", document.getId() + " => " + document.getData());
+                                System.out.println(document.getId() + " => " + document.getData());
+                                Log.d("search Data", "search calll2");
+                                String Model = (String) document.getData().get("Model");
+                                Float Amount = Float.parseFloat(String.valueOf(document.getData().get("Amount")));
+                                String Address = (String) document.getData().get("Address");
+                                String Classification = (String) document.getData().get("Classification");
+                                Log.d("search Data", "search calll3");
+                                int Seaters = Integer.parseInt(String.valueOf(document.getData().get("Seaters")));
+                                Log.d("search Data", "search calll4");
+                                String UserID = document.getId();
+
+
+                                Log.d("search Data", "search modellll" + Model);
+                                Log.d("search Data", "search amounttttt" + Amount);
+
+//                                if ((Model.toLowerCase()).startsWith(finalSearch_text) || (Address.toLowerCase()).startsWith(finalSearch_text) || (Classification.toLowerCase()).startsWith(finalSearch_text)) {
+                                if ((Model.toLowerCase()).startsWith(finalSearch_text)){
+
+                                    getSearch(UserID, Model, Amount.toString());
+                                    setHorizontal();
+
+                                } else {
+                                    HorizontalList.clear();
+                                    VerticalList.clear();
+                                    setHorizontal();
+                                    setVertical();
+                                   // Toast.makeText(getActivity().getApplicationContext(), "Oops No Cars Found", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                            }
+                    }
+                });
+    }
+
     public void RefreshData() {
-//        Toast.makeText(getActivity(), "cALLLLLLL", Toast.LENGTH_SHORT).show();
-//
-//        HorizontalList.add(new HorizontalCarData("Honda", "$19000", R.drawable.logo));
-//        HorizontalList.add(new HorizontalCarData("Hyundai", "$17000", R.drawable.logo));
-//        HorizontalList.add(new HorizontalCarData("Toyota", "$25000", R.drawable.logo));
-//        HorizontalList.add(new HorizontalCarData("Ford", "$7000", R.drawable.logo));
-//        HorizontalList.add(new HorizontalCarData("Mazda", "$17899", R.drawable.logo));
-//        HorizontalList.add(new HorizontalCarData("Suzuki", "$5670", R.drawable.logo));
-//        setHorizontal(HorizontalList);
-//
-//        List<VerticalCarData> VerticalList = new ArrayList<>();
-//        VerticalList.add(new VerticalCarData("Honda", "$19000", R.drawable.logo,  "OLD"));
-//        VerticalList.add(new VerticalCarData("Hyundai", "$17000", R.drawable.logo,  "OLD"));
-//        VerticalList.add(new VerticalCarData("Toyota", "$25000", R.drawable.logo,  "NEW"));
-//        VerticalList.add(new VerticalCarData("Ford", "$7000", R.drawable.logo, "NEW"));
-//        VerticalList.add(new VerticalCarData("Mazda", "$17899", R.drawable.logo, "OLD"));
-//        VerticalList.add(new VerticalCarData("Suzuki", "$5670", R.drawable.logo, "NEW"));
-//
-//        setVertical(VerticalList);
         HorizontalList.clear();
         VerticalList.clear();
         auth = FirebaseAuth.getInstance();
@@ -164,6 +233,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("", document.getId() + " => " + document.getData());
                                 System.out.println(document.getId() + " => " + document.getData());
@@ -186,9 +256,6 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
-
-//
-//
     }
     private void setHorizontal() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -204,6 +271,19 @@ public class HomeFragment extends Fragment {
         VerticalAdapter = new Vertical_Car_Adapter(getActivity(), VerticalList);
         VerticalRecycler.setAdapter(VerticalAdapter);
 
+    }
+    private void getSearch(final String UserID,final String Model,final String Amount) {
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        storageReference.child("images/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+
+                VerticalList.clear();
+                HorizontalList.add(new HorizontalCarData(UserID,Model, Amount, uri));
+                HorizontalAdapter.notifyDataSetChanged();
+            }
+        });
     }
     private void getImage(final String UserID,final String Model,final String Amount,final String Conditon) {
         storageReference = FirebaseStorage.getInstance().getReference();

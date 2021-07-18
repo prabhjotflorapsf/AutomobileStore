@@ -139,27 +139,41 @@ public class HomeFragment extends Fragment {
                 filter(getActivity());
             }
         });
-
-        search.setOnKeyListener(new View.OnKeyListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            public void onClick(View v) {
 
+               String s=search.getText().toString().toLowerCase();
 
+//                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
+                if(s.isEmpty()||s==null) {
+                    Log.d(TAG, "onClick: hellooooo");
+                    RefreshData();
+                }else {
 
-                if(keyCode==KeyEvent.KEYCODE_DEL)
-                {
-                    if(search.getText().toString().length()==1) {
-//                        HorizontalList.clear();
-                        RefreshData();
-                    }else{
-                        Search(search.getText().toString());
-                    }
+                    Search(search.getText().toString());
                 }
-                Search(search.getText().toString());
-
-                return false;
             }
         });
+
+
+
+//        search.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                String s=search.getText().toString().toLowerCase();
+//
+////                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
+//                if(s.isEmpty()||s==null) {
+//                    Log.d(TAG, "onClick: hellooooo");
+//                    RefreshData();
+//                }else {
+//
+//                    Search(search.getText().toString());
+//                }
+//                return false;
+//            }
+//        });
 
 
         return v;
@@ -175,7 +189,7 @@ public class HomeFragment extends Fragment {
         if (curUser != null) {
             userId = curUser.getUid(); //Do what you need to do with the id
         }
-        String finalSearch_text = search_text.toLowerCase();
+
 
         db.collection("Car")
 //                .whereGreaterThan("Amount",min).whereLessThan("Amount",max)
@@ -203,7 +217,7 @@ public class HomeFragment extends Fragment {
                                 Log.d("search Data", "search amounttttt" + Amount);
 
 //                                if ((Model.toLowerCase()).startsWith(finalSearch_text) || (Address.toLowerCase()).startsWith(finalSearch_text) || (Classification.toLowerCase()).startsWith(finalSearch_text)) {
-                                if ((Model.toLowerCase()).startsWith(finalSearch_text)){
+                                if ((Model.toLowerCase()).startsWith(search_text)){
 
                                     getSearch(UserID, Model, Amount.toString());
                                     setHorizontal();
@@ -239,6 +253,7 @@ public class HomeFragment extends Fragment {
                         if (task.isSuccessful()) {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
+
                                 Log.d("", document.getId() + " => " + document.getData());
                                 System.out.println(document.getId() + " => " + document.getData());
                                 String Model = (String) document.getData().get("Model");
@@ -284,6 +299,8 @@ public class HomeFragment extends Fragment {
             public void onSuccess(Uri uri) {
 
                 VerticalList.clear();
+                Log.d(TAG, "getSearch: hellooooo");
+
                 HorizontalList.add(new HorizontalCarData(UserID,Model, Amount, uri));
                 HorizontalAdapter.notifyDataSetChanged();
             }

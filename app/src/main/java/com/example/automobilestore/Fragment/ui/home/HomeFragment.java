@@ -213,6 +213,7 @@ public class HomeFragment extends Fragment {
                                 String UserID = document.getId();
 
 
+
                                 Log.d("search Data", "search modellll" + Model);
                                 Log.d("search Data", "search amounttttt" + Amount);
 

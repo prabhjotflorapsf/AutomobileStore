@@ -85,7 +85,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
             Price = itemView.findViewById(R.id.postlist_price);
             Engine_type = itemView.findViewById(R.id.postlist_Type);
             Year = itemView.findViewById(R.id.postlist_Year);
-            Model = itemView.findViewById(R.id.postlist_Model);
+            Model = itemView.findViewById(R.id.company_name);
             item = itemView;
 
 

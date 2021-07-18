@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.automobilestore.Activity.PostAd;
+import com.example.automobilestore.Activity.ProfileDetails;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,6 +77,8 @@ public class AdminHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                Toast.makeText(AdminHome.this, "clicked", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(AdminHome.this, Post_AddOns.class);
+                startActivity(i);
             }
         });
         Services.setOnClickListener(new View.OnClickListener() {

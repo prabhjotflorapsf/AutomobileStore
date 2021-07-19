@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.automobilestore.Activity.CreateAccount;
 import com.example.automobilestore.Activity.ForgotPassword;
+import com.example.automobilestore.Admin.AdminHome;
 import com.example.automobilestore.Admin.admin_signin;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
@@ -145,6 +146,7 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), admin_signin.class);
+//                Intent i = new Intent(getActivity().getApplicationContext(), AdminHome.class);
                 startActivity(i);
             }
         });

@@ -14,7 +14,8 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="-3dp"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="0dp"
         android:background="#3cb6d3">
 
         <ImageView

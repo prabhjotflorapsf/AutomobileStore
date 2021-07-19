@@ -4,7 +4,7 @@ import android.net.Uri;
 
 public class AddOns {
     String id;
-    String Comapny,Address,url;
+    String Company,Address,url;
     private Uri image;
 
     public String getId() {
@@ -15,12 +15,12 @@ public class AddOns {
         this.id = id;
     }
 
-    public String getComapny() {
-        return Comapny;
+    public String getCompany() {
+        return Company;
     }
 
-    public void setComapny(String comapny) {
-        Comapny = comapny;
+    public void setCompany(String company) {
+        Company = company;
     }
 
     public String getAddress() {
@@ -49,9 +49,9 @@ public class AddOns {
 
 
 
-    public AddOns(String id, String comapny, String address, String url, Uri image) {
+    public AddOns(String id, String company, String address, String url, Uri image) {
         this.id = id;
-        Comapny = comapny;
+        Company = company;
         Address = address;
         this.url = url;
         this.image = image;

@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automobilestore.Activity.WebViewCustom;
-import com.example.automobilestore.Admin.Post_AddOns;
+
 import com.example.automobilestore.R;
 import com.squareup.picasso.Picasso;
 
@@ -24,82 +24,69 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-public class AddOns_Adapter extends RecyclerView.Adapter<AddOns_Adapter.AddOnsViewHolder> {
+public class Services_Adapter extends RecyclerView.Adapter<Services_Adapter.ServicesViewHolder> {
     Context context;
-    List<AddOns> AddOnsList;
-   
-    
+    List<Services> AddOnsList;
     String str;
-    public AddOns_Adapter(Context context, List<AddOns> popularFoodList,String str) {
+    public Services_Adapter(Context context, List<Services> addOnsList,String str) {
         this.context = context;
-        this.AddOnsList = popularFoodList;
+        AddOnsList = addOnsList;
         this.str=str;
     }
+
     @NonNull
     @NotNull
     @Override
-    public AddOnsViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.add_ons_item, parent, false);
-
-        return new AddOnsViewHolder(view);
+    public ServicesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.services_item, parent, false);
+        return new ServicesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull AddOnsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull ServicesViewHolder holder, int position) {
+        Log.d(TAG, "Services_Adapter: "+str);
         Picasso.get().load(AddOnsList.get(position).getImage()).fit().into(holder.image);
         holder.company.setText(AddOnsList.get(position).getCompany());
         holder.address.setText(AddOnsList.get(position).getAddress());
-        Log.d(TAG, "onBindViewHolder: "+1);
-
+        Log.d(TAG, "onBindViewHolder: " + 1);
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (str == "Admin") {
-                    Intent i = new Intent(view.getContext(), Post_AddOns.class);
+                    Intent i = new Intent(view.getContext(), Post_Services.class);
                     i.putExtra("id", AddOnsList.get(position).getId());
                     context.startActivity(i);
                 }else if(str=="User"){
-                   
-                   
+
+
                     Intent i = new Intent(view.getContext(), WebViewCustom.class);
                     i.putExtra("Link", AddOnsList.get(position).getUrl());
                     context.startActivity(i);
-                    
+
                 }else{
                     Toast.makeText(context, "error", Toast.LENGTH_SHORT).show();
                 }
-
-
-//                Comp= view.findViewById(R.id.add_c);
-//                addr=view.findViewById(R.id.add_a);
-//                link=view.findViewById(R.id.add_l);
-//                Log.d(TAG, "onClick: "+AddOnsList.get(position).getAddress());
-//
-//                Comp.getEditText().setText(AddOnsList.get(position).getCompany());
-//                addr.getEditText().setText(AddOnsList.get(position).getAddress());
-//                link.getEditText().setText(AddOnsList.get(position).getUrl());
             }
+
         });
-
     }
-
     @Override
     public int getItemCount() {
         return AddOnsList.size();
     }
 
-    public class AddOnsViewHolder extends RecyclerView.ViewHolder {
+    public class ServicesViewHolder extends RecyclerView.ViewHolder {
 
         View item;
         ImageView image;
         TextView company, address;
 
-        public AddOnsViewHolder(@NonNull View itemView) {
+        public ServicesViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            image = itemView.findViewById(R.id.add_ons_image);
-            company = itemView.findViewById(R.id.item_company);
-            address = itemView.findViewById(R.id.item_Address);
+            image = itemView.findViewById(R.id.services_image);
+            company = itemView.findViewById(R.id.services_company);
+            address = itemView.findViewById(R.id.services_Address);
             item = itemView;
 
 

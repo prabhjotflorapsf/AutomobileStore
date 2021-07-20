@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.automobilestore.Activity.UpdateAd;
+import com.example.automobilestore.Activity.WebViewCustom;
 import com.example.automobilestore.Admin.Post_AddOns;
 import com.example.automobilestore.R;
-import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,10 +27,13 @@ import static android.content.ContentValues.TAG;
 public class AddOns_Adapter extends RecyclerView.Adapter<AddOns_Adapter.AddOnsViewHolder> {
     Context context;
     List<AddOns> AddOnsList;
-    TextInputLayout Comp,addr,link;
-    public AddOns_Adapter(Context context, List<AddOns> popularFoodList) {
+   
+    
+    String str;
+    public AddOns_Adapter(Context context, List<AddOns> popularFoodList,String str) {
         this.context = context;
         this.AddOnsList = popularFoodList;
+        this.str=str;
     }
     @NonNull
     @NotNull
@@ -44,15 +47,27 @@ public class AddOns_Adapter extends RecyclerView.Adapter<AddOns_Adapter.AddOnsVi
     public void onBindViewHolder(@NonNull @NotNull AddOnsViewHolder holder, int position) {
         Picasso.get().load(AddOnsList.get(position).getImage()).fit().into(holder.image);
         holder.company.setText(AddOnsList.get(position).getCompany());
-        holder.address.setText("$"+AddOnsList.get(position).getAddress());
-
+        holder.address.setText(AddOnsList.get(position).getAddress());
+        Log.d(TAG, "onBindViewHolder: "+1);
 
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), Post_AddOns.class);
-                i.putExtra("id", AddOnsList.get(position).getId());
-                context.startActivity(i);
+                if (str == "Admin") {
+                    Intent i = new Intent(view.getContext(), Post_AddOns.class);
+                    i.putExtra("id", AddOnsList.get(position).getId());
+                    context.startActivity(i);
+                }else if(str=="User"){
+                   
+                   
+                    Intent i = new Intent(view.getContext(), WebViewCustom.class);
+                    i.putExtra("Link", AddOnsList.get(position).getUrl());
+                    context.startActivity(i);
+                    
+                }else{
+                    Toast.makeText(context, "error", Toast.LENGTH_SHORT).show();
+                }
+
 
 //                Comp= view.findViewById(R.id.add_c);
 //                addr=view.findViewById(R.id.add_a);

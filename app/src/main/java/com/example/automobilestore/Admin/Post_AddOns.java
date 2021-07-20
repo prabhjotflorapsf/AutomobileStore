@@ -382,9 +382,9 @@ public class Post_AddOns extends AppCompatActivity {
 
     }
     private void setAddOnsAdapter() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         Recycler.setLayoutManager(layoutManager);
-        AddOnsAdapter = new AddOns_Adapter(Post_AddOns.this,A_List);
+        AddOnsAdapter = new AddOns_Adapter(Post_AddOns.this,A_List,"Admin");
         Recycler.setAdapter(AddOnsAdapter);
     }
 

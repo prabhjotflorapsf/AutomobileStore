@@ -66,7 +66,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/Model_Update"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="433dp"
+                android:layout_width="397dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
@@ -78,7 +78,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/model"
-                    android:layout_width="match_parent"
+                    android:layout_width="403dp"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -950,7 +950,7 @@
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#3cb6d3"
                 android:singleLine="true"
-                android:text="update_ad"
+                android:text="Update"
                 android:textAllCaps="false" />
 
         </LinearLayout>

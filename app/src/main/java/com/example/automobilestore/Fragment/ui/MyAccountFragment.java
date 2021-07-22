@@ -13,6 +13,7 @@ import com.example.automobilestore.Activity.Add_ons;
 import com.example.automobilestore.Activity.ForgotPassword;
 import com.example.automobilestore.Activity.PostList;
 import com.example.automobilestore.Activity.ProfileDetails;
+import com.example.automobilestore.Activity.Services;
 import com.example.automobilestore.Activity.WebViewCustom;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
@@ -112,7 +113,7 @@ public class MyAccountFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                Intent i = new Intent(getActivity(), WebViewCustom.class);
+                Intent i = new Intent(getActivity(), Services.class);
                 startActivity(i);
 
                 return true;

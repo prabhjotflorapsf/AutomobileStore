@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automobilestore.Activity.WebViewCustom;
 
+import com.example.automobilestore.Admin.Post_Services;
 import com.example.automobilestore.R;
 import com.squareup.picasso.Picasso;
 
@@ -38,7 +39,7 @@ public class Services_Adapter extends RecyclerView.Adapter<Services_Adapter.Serv
     @NotNull
     @Override
     public ServicesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.services_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.add_ons_item, parent, false);
         return new ServicesViewHolder(view);
     }
 
@@ -84,9 +85,9 @@ public class Services_Adapter extends RecyclerView.Adapter<Services_Adapter.Serv
         public ServicesViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            image = itemView.findViewById(R.id.services_image);
-            company = itemView.findViewById(R.id.services_company);
-            address = itemView.findViewById(R.id.services_Address);
+            image = itemView.findViewById(R.id.add_ons_image);
+            company = itemView.findViewById(R.id.item_company);
+            address = itemView.findViewById(R.id.item_Address);
             item = itemView;
 
 

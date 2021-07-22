@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
-        <activity android:name=".Admin.Model_adapter.Post_Services"></activity>
+        <activity android:name=".Activity.Services"></activity>
+        <activity android:name=".Admin.Post_Services" />
         <activity android:name=".Admin.Post_AddOns" />
         <activity android:name=".Activity.Add_ons" />
         <activity android:name=".Activity.WebViewCustom" />

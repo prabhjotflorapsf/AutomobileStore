@@ -1,7 +1,9 @@
 package com.example.automobilestore.Admin.Model_adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.automobilestore.Activity.UpdateAd;
 import com.example.automobilestore.Activity.WebViewCustom;
 import com.example.automobilestore.Admin.Post_AddOns;
 import com.example.automobilestore.R;
@@ -59,11 +62,13 @@ public class AddOns_Adapter extends RecyclerView.Adapter<AddOns_Adapter.AddOnsVi
                     i.putExtra("id", AddOnsList.get(position).getId());
                     context.startActivity(i);
                 }else if(str=="User"){
-                   
-                   
+
+
                     Intent i = new Intent(view.getContext(), WebViewCustom.class);
                     i.putExtra("Link", AddOnsList.get(position).getUrl());
                     context.startActivity(i);
+
+
                     
                 }else{
                     Toast.makeText(context, "error", Toast.LENGTH_SHORT).show();

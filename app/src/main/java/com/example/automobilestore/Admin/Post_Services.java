@@ -1,4 +1,4 @@
-package com.example.automobilestore.Admin.Model_adapter;
+package com.example.automobilestore.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,10 +18,13 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.automobilestore.Admin.Model_adapter.Services;
+import com.example.automobilestore.Admin.Model_adapter.Services_Adapter;
 import com.example.automobilestore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -132,6 +135,8 @@ public class Post_Services extends AppCompatActivity {
         } else if (l.isEmpty()) {
             Toast.makeText(Post_Services.this, "Please Enter Url", Toast.LENGTH_LONG).show();
             return;
+        }else if(URLUtil.isValidUrl(l)){
+            Toast.makeText(Post_Services.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
         } else {
             final ProgressDialog pd;
             pd = new ProgressDialog(Post_Services.this);
@@ -266,7 +271,10 @@ public class Post_Services extends AppCompatActivity {
             return;
         }else if (photos < 1) {
             Toast.makeText(Post_Services.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
-        }else {
+        }else if(URLUtil.isValidUrl(l)){
+            Toast.makeText(Post_Services.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
+        }
+        else {
             final ProgressDialog pd;
             pd = new ProgressDialog(Post_Services.this);
             pd.setMessage("Loading...");

@@ -139,6 +139,7 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/add_post_admin"
                         android:layout_width="107dp"
                         android:layout_height="99dp"
                         android:layout_gravity="center"

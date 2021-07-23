@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.automobilestore.Activity.PostAd;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +20,7 @@ public class AdminHome extends AppCompatActivity {
 
     TextView welcome, logout;
     FirebaseAuth firebaseAuth;
-    ImageView Imlogout;
+    ImageView Imlogout,addPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,15 @@ public class AdminHome extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         welcome = findViewById(R.id.welcome_admin);
         Imlogout = findViewById(R.id.logout_img);
+        addPost = findViewById(R.id.add_post_admin);
+
+        addPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PostAd.class);
+                startActivity(i);
+            }
+        });
 
         Imlogout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -37,7 +37,7 @@ public class AdminHome extends AppCompatActivity {
     private FirebaseAuth auth;
     FirebaseFirestore db;
     private FirebaseUser curUser;
-    LinearLayout addOns,Services;
+    LinearLayout addOns, services , userLogs;
 
 
     @Override
@@ -62,7 +62,8 @@ public class AdminHome extends AppCompatActivity {
         User_count=findViewById(R.id.tv_ucount);
         Post_count=findViewById(R.id.tv_pcount);
         addOns=findViewById(R.id.add_ons_btn);
-        Services=findViewById(R.id.services_btn);
+        services =findViewById(R.id.services_btn);
+        userLogs = findViewById(R.id.userLogs);
 
         getCount();
 
@@ -87,12 +88,19 @@ public class AdminHome extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        Services.setOnClickListener(new View.OnClickListener() {
+        services.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(AdminHome.this, Post_Services.class);
                 startActivity(i);
 //                Toast.makeText(AdminHome.this, "clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+        userLogs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdminHome.this , EditUser.class);
+                startActivity(i);
             }
         });
     }

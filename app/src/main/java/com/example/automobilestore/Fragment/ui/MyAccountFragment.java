@@ -9,9 +9,12 @@ import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.example.automobilestore.Activity.Add_ons;
 import com.example.automobilestore.Activity.ForgotPassword;
 import com.example.automobilestore.Activity.PostList;
 import com.example.automobilestore.Activity.ProfileDetails;
+import com.example.automobilestore.Activity.Services;
+import com.example.automobilestore.Activity.WebViewCustom;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,6 +55,8 @@ public class MyAccountFragment extends PreferenceFragmentCompat {
         Preference security = findPreference("security");
         Preference manage = findPreference("manage");
         Preference logout = findPreference("logout");
+        Preference add_ons = findPreference("Add-Ons");
+        Preference services = findPreference("Services");
 
         profile.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -90,6 +95,27 @@ public class MyAccountFragment extends PreferenceFragmentCompat {
                 Intent i = new Intent(getActivity(), MainActivity.class);
                 startActivity(i);
                 Toast.makeText(getActivity(), "Logout Successfully", Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+        add_ons.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+
+                Intent i = new Intent(getActivity(), Add_ons.class);
+                startActivity(i);
+
+                return true;
+            }
+        });
+        services.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Intent i = new Intent(getActivity(), Services.class);
+                startActivity(i);
+
                 return true;
             }
         });

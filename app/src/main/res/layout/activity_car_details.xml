@@ -27,6 +27,12 @@
             android:textColor="#ffffff"
             android:textSize="28sp"
             android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/report"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:src="@drawable/report" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -92,6 +98,11 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:src="@drawable/like" />
+
+                <FrameLayout
+                    android:id="@+id/loginlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></FrameLayout>
             </LinearLayout>
 
 
@@ -108,7 +119,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/logo" />
+                    android:src="@drawable/locationpin" />
 
                 <TextView
                     android:id="@+id/address"
@@ -140,6 +151,19 @@
                 app:tabSelectedTextColor="@android:color/black"
                 app:tabTextColor="@android:color/darker_gray" />
 
+            <Button
+                android:id="@+id/ContactOwner"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#3cb6d3"
+                android:singleLine="true"
+                android:text="Contact Owner" />
+
             <view
                 android:id="@+id/viewPager"
                 class="com.example.automobilestore.Others.CustomeViewPager"
@@ -155,28 +179,9 @@
                 android:layout_marginTop="10dp" />
 
 
-            <Button
-                android:id="@+id/ContactOwner"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:backgroundTint="#3cb6d3"
-                android:singleLine="true"
-                android:text="Contact Owner" />
-
-
         </LinearLayout>
 
 
     </ScrollView>
-
-    <FrameLayout
-        android:id="@+id/loginlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
 
 </RelativeLayout>

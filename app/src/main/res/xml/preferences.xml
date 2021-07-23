@@ -28,6 +28,20 @@
     </PreferenceCategory>
     <PreferenceCategory>
         <Preference
+            app:icon="@drawable/addpost"
+            app:key="Add-Ons"
+            app:summary="see new Add-Ons package"
+            app:title="Add-Ons" />
+    </PreferenceCategory>
+    <PreferenceCategory>
+        <Preference
+            android:icon="@drawable/services"
+            app:key="Services"
+            app:summary="find Maintenance &amp; services"
+            app:title="Maintenance &amp; Services" />
+    </PreferenceCategory>
+    <PreferenceCategory>
+        <Preference
             android:icon="@drawable/logout"
             app:key="logout"
             app:summary="Logout from the application"

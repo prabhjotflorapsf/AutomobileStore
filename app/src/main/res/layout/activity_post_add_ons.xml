@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Admin Side Code-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,8 +31,19 @@
             android:textStyle="bold"
             tools:ignore="RtlHardcoded" />
 
+        <ImageView
+            android:id="@+id/a_delete"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:visibility="gone"
+            android:src="@drawable/trash" />
 
     </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -98,7 +110,7 @@
             android:focusableInTouchMode="true"
             android:hint="WebSite Link"
             app:counterEnabled="true"
-            app:counterMaxLength="200">
+            app:counterMaxLength="2000">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_Link"
@@ -106,24 +118,44 @@
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/submit_post"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="386dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="#3cb6d3"
-            android:singleLine="true"
-            android:text="Post" />
+    <Button
+        android:id="@+id/submit_post"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="2dp"
+        android:backgroundTint="#3cb6d3"
+        android:singleLine="true"
+        android:text="Post" />
+
+    <Button
+        android:id="@+id/Update_post"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="#3cb6d3"
+        android:singleLine="true"
+        android:visibility="gone"
+        android:text="Update" />
+</LinearLayout>
+
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refresh_List"
             android:layout_width="match_parent"
-            android:layout_height="281dp"
+            android:layout_height="617dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.75"
@@ -134,9 +166,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/add_rv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:listitem="@layout/add_ons_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

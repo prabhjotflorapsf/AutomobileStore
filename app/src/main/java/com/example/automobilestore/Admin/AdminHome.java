@@ -77,6 +77,8 @@ public class AdminHome extends AppCompatActivity {
         services.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(AdminHome.this, Post_Services.class);
+                startActivity(i);
 //                Toast.makeText(AdminHome.this, "clicked", Toast.LENGTH_SHORT).show();
             }
         });

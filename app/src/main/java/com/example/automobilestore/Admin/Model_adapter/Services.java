@@ -2,11 +2,10 @@ package com.example.automobilestore.Admin.Model_adapter;
 
 import android.net.Uri;
 
-public class AddOns {
+public class Services {
     String id;
     String Company,Address,url;
     private Uri image;
-
     public String getId() {
         return id;
     }
@@ -48,8 +47,7 @@ public class AddOns {
     }
 
 
-
-    public AddOns(String id, String company, String address, String url, Uri image) {
+    public Services(String id, String company, String address, String url, Uri image) {
         this.id = id;
         Company = company;
         Address = address;

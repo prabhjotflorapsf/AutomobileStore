@@ -1,5 +1,5 @@
 package com.example.automobilestore.Admin;
-// Admin Side ADD_ons Page
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,15 +23,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.automobilestore.Activity.Add_ons;
-import com.example.automobilestore.Activity.PostAd;
-import com.example.automobilestore.Activity.UpdateAd;
-import com.example.automobilestore.Admin.Model_adapter.AddOns;
-import com.example.automobilestore.Admin.Model_adapter.AddOns_Adapter;
+import com.example.automobilestore.Admin.Model_adapter.Services;
+import com.example.automobilestore.Admin.Model_adapter.Services_Adapter;
 import com.example.automobilestore.R;
-import com.example.automobilestore.adapter.Horizontal_Car_Adapter;
-import com.example.automobilestore.model.HorizontalCarData;
-import com.example.automobilestore.model.VerticalCarData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,7 +50,7 @@ import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
-public class Post_AddOns extends AppCompatActivity {
+public class Post_Services extends AppCompatActivity {
     TextInputLayout Comp,addr,link;
     Button post,update;
     FirebaseFirestore fstore;
@@ -69,34 +63,33 @@ public class Post_AddOns extends AppCompatActivity {
     ImageView[] image;
     ArrayList<Uri> contenturi = new ArrayList<Uri>();
     int photos = 0,internetPhotos = 0;
-    List<AddOns> A_List = new ArrayList<>();
-    AddOns_Adapter AddOnsAdapter;
+    List<Services> A_List = new ArrayList<>();
+    Services_Adapter ServicesAdapter;
     SwipeRefreshLayout swipeContainer;
     String uID="";
     Boolean changed = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_add_ons);
-
-        Comp= findViewById(R.id.add_c);
-        addr=findViewById(R.id.add_a);
-        link=findViewById(R.id.add_l);
-        post=findViewById(R.id.submit_post);
-        update=findViewById(R.id.Update_post);
-        upload = findViewById(R.id.add_image);
-        del=findViewById(R.id.a_delete);
+        setContentView(R.layout.activity_post_services);
+        Comp= findViewById(R.id.s_c);
+        addr=findViewById(R.id.s_a);
+        link=findViewById(R.id.s_l);
+        post=findViewById(R.id.s_submit_post);
+        update=findViewById(R.id.s_Update_post);
+        upload = findViewById(R.id.s_image);
+        del=findViewById(R.id.s_delete);
         image = new ImageView[]{upload, selectedImage1, selectedImage2, selectedImage3};
-        Recycler=findViewById(R.id.add_rv);
+        Recycler=findViewById(R.id.Services_rv);
         getData();
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.refresh_List);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.s_refresh_List);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 A_List.clear();
-            getData();
+                getData();
                 swipeContainer.setRefreshing(false);
             }
         });
@@ -111,7 +104,7 @@ public class Post_AddOns extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    PostData();
+                PostData();
             }
         });
         update.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +120,6 @@ public class Post_AddOns extends AppCompatActivity {
             }
         });
     }
-
     private void updatedata() {
         fstore = FirebaseFirestore.getInstance();
 
@@ -135,23 +127,19 @@ public class Post_AddOns extends AppCompatActivity {
         final String a = addr.getEditText().getText().toString().trim();
         final String l = link.getEditText().getText().toString().trim();
         if (c.isEmpty()) {
-            Toast.makeText(Post_AddOns.this, "Please Enter Company", Toast.LENGTH_LONG).show();
+            Toast.makeText(Post_Services.this, "Please Enter Company", Toast.LENGTH_LONG).show();
             return;
         } else if (a.isEmpty()) {
-            Toast.makeText(Post_AddOns.this, "Please Enter Address", Toast.LENGTH_LONG).show();
+            Toast.makeText(Post_Services.this, "Please Enter Address", Toast.LENGTH_LONG).show();
             return;
         } else if (l.isEmpty()) {
-            Toast.makeText(Post_AddOns.this, "Please Enter Url", Toast.LENGTH_LONG).show();
-            return;}
-        else if(URLUtil.isValidUrl(l)){
-            Toast.makeText(Post_AddOns.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
-        }
-//        } else if (photos < 1) {
-//            Toast.makeText(Post_AddOns.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
-//        }
-        else {
+            Toast.makeText(Post_Services.this, "Please Enter Url", Toast.LENGTH_LONG).show();
+            return;
+        }else if(URLUtil.isValidUrl(l)){
+            Toast.makeText(Post_Services.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
+        } else {
             final ProgressDialog pd;
-            pd = new ProgressDialog(Post_AddOns.this);
+            pd = new ProgressDialog(Post_Services.this);
             pd.setMessage("Loading...");
             pd.show();
 
@@ -159,16 +147,16 @@ public class Post_AddOns extends AppCompatActivity {
             userMap.put("Company", c);
             userMap.put("Address", a);
             userMap.put("Link", l);
-            fstore.collection("AddOns").document(uID).set(userMap)
+            fstore.collection("Services").document(uID).set(userMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             if (changed) {
-                              //  uploadImage((uID));
+                               // uploadImage((uID));
                             }
                             Log.d("TAG", "DocumentSnapshot successfully written!");
                             SystemClock.sleep(3000);
-                            Toast.makeText(Post_AddOns.this, "Post Updated Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Post_Services.this, "Post Updated Successfully", Toast.LENGTH_SHORT).show();
                             pd.dismiss();
                             finish();
                         }
@@ -184,14 +172,14 @@ public class Post_AddOns extends AppCompatActivity {
     }
     private void delete() {
         fstore = FirebaseFirestore.getInstance();
-        DocumentReference docRef = fstore.collection("AddOns").document(uID);
+        DocumentReference docRef = fstore.collection("Services").document(uID);
         docRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 deleteImages();
                 Log.d("tagvv", "DocumentSnapshot successfully deleted!");
 //                A_List.clear();
-                Toast.makeText(Post_AddOns.this, "Post Deleted Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Post_Services.this, "Post Deleted Successfully", Toast.LENGTH_SHORT).show();
                 finish();
             }
         })
@@ -206,7 +194,7 @@ public class Post_AddOns extends AppCompatActivity {
 
     private void getData() {
         fstore = FirebaseFirestore.getInstance();
-        fstore.collection("AddOns").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        fstore.collection("Services").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -218,7 +206,7 @@ public class Post_AddOns extends AppCompatActivity {
                         Log.d(TAG, "onComplete: "+UserID);
                         getImage(UserID,Company,Address,Link);
 
-                       setAddOnsAdapter();
+                        setServicesAdapter();
 
                     }
                 }
@@ -227,12 +215,12 @@ public class Post_AddOns extends AppCompatActivity {
     }
     private void getImage(final String UserID,final String Company,final String Address,final String Link) {
         storageReference = FirebaseStorage.getInstance().getReference();
-        storageReference.child("AddOnsImage/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference.child("ServicesImage/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                    A_List.add(new AddOns(UserID,Company, Address,Link, uri));
+                A_List.add(new Services(UserID,Company, Address,Link, uri));
                 Log.d(TAG, "onSuccess: "+uri);
-                AddOnsAdapter.notifyDataSetChanged();
+                ServicesAdapter.notifyDataSetChanged();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -249,7 +237,7 @@ public class Post_AddOns extends AppCompatActivity {
 
 // Create a reference to the file to delete
         for (int i = 0; i < internetPhotos; i++) {
-            StorageReference desertRef = storageReference.child("AddOnsImage/"+ uID + "/0");
+            StorageReference desertRef = storageReference.child("ServicesImage/"+ uID + "/0");
 // Delete the file
             desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -273,21 +261,22 @@ public class Post_AddOns extends AppCompatActivity {
         final String a = addr.getEditText().getText().toString().trim();
         final String l = link.getEditText().getText().toString().trim();
         if (c.isEmpty()) {
-            Toast.makeText(Post_AddOns.this, "Please Enter Company", Toast.LENGTH_LONG).show();
+            Toast.makeText(Post_Services.this, "Please Enter Company", Toast.LENGTH_LONG).show();
             return;
         }else if (a.isEmpty()) {
-            Toast.makeText(Post_AddOns.this, "Please Enter Address", Toast.LENGTH_LONG).show();
+            Toast.makeText(Post_Services.this, "Please Enter Address", Toast.LENGTH_LONG).show();
             return;
         }else if (l.isEmpty()) {
-            Toast.makeText(Post_AddOns.this, "Please Enter Url", Toast.LENGTH_LONG).show();
+            Toast.makeText(Post_Services.this, "Please Enter Url", Toast.LENGTH_LONG).show();
             return;
         }else if (photos < 1) {
-            Toast.makeText(Post_AddOns.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
+            Toast.makeText(Post_Services.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
         }else if(URLUtil.isValidUrl(l)){
-            Toast.makeText(Post_AddOns.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
-        }else {
+            Toast.makeText(Post_Services.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
+        }
+        else {
             final ProgressDialog pd;
-            pd = new ProgressDialog(Post_AddOns.this);
+            pd = new ProgressDialog(Post_Services.this);
             pd.setMessage("Loading...");
             pd.show();
 
@@ -295,12 +284,12 @@ public class Post_AddOns extends AppCompatActivity {
             userMap.put("Company", c);
             userMap.put("Address", a);
             userMap.put("Link", l);
-            fstore.collection("AddOns").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            fstore.collection("Services").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     Log.d("Demoooooooo1o1", "onSuccess: " + documentReference.getId());
                     uploadImage((String) documentReference.getId());
-                    Toast.makeText(Post_AddOns.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Post_Services.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
                     pd.dismiss();
 
                     finish();
@@ -312,14 +301,14 @@ public class Post_AddOns extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
 
                     String Error = e.getMessage();
-                    Toast.makeText(Post_AddOns.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Post_Services.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
     private void selectImage() {
         final CharSequence[] options = {"Choose from Gallery", "Cancel"};
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(Post_AddOns.this);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(Post_Services.this);
         builder1.setTitle("Add Photo!");
         builder1.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -369,8 +358,7 @@ public class Post_AddOns extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         for (int j = 0; j < contenturi.size(); j++) {
 
-
-            StorageReference ref = storageReference.child("AddOnsImage").child(id + "/" + j);
+            StorageReference ref = storageReference.child("ServicesImage").child(id + "/" + j);
             ref.putFile(contenturi.get(j))
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -382,18 +370,20 @@ public class Post_AddOns extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
 
-                            Toast.makeText(Post_AddOns.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Post_Services.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
         }
 
     }
-    private void setAddOnsAdapter() {
+    private void setServicesAdapter() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         Recycler.setLayoutManager(layoutManager);
-        AddOnsAdapter = new AddOns_Adapter(Post_AddOns.this,A_List,"Admin");
-        Recycler.setAdapter(AddOnsAdapter);
+        ServicesAdapter = new Services_Adapter(Post_Services.this,A_List,"Admin");
+
+        Recycler.setAdapter(ServicesAdapter);
+
     }
 
     @Override
@@ -401,14 +391,14 @@ public class Post_AddOns extends AppCompatActivity {
         super.onResume();
         Intent intent = getIntent();
 
-        uID=intent.getStringExtra("id");
-        if(uID!=null){
+        uID = intent.getStringExtra("id");
+        if (uID != null) {
             update.setVisibility(View.VISIBLE);
             del.setVisibility(View.VISIBLE);
             post.setVisibility(View.GONE);
             upload.setVisibility(View.GONE);
             fstore = FirebaseFirestore.getInstance();
-            DocumentReference docRef = fstore.collection("AddOns").document(uID);
+            DocumentReference docRef = fstore.collection("Services").document(uID);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

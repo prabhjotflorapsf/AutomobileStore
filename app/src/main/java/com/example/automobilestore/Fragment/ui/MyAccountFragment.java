@@ -9,10 +9,12 @@ import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.example.automobilestore.Activity.Add_ons;
 import com.example.automobilestore.Activity.ForgotPassword;
 import com.example.automobilestore.Activity.PostList;
 import com.example.automobilestore.Activity.ProfileDetails;
 import com.example.automobilestore.Activity.Services;
+import com.example.automobilestore.Activity.WebViewCustom;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -100,10 +102,10 @@ public class MyAccountFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                FirebaseAuth.getInstance().signOut();
-                Intent i = new Intent(getActivity(), MainActivity.class);
+
+                Intent i = new Intent(getActivity(), Add_ons.class);
                 startActivity(i);
-                Toast.makeText(getActivity(), "Logout Successfully", Toast.LENGTH_LONG).show();
+
                 return true;
             }
         });

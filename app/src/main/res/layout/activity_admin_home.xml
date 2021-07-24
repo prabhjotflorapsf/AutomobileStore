@@ -160,6 +160,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/Posts_Logs"
                     android:layout_width="171dp"
                     android:layout_height="155dp"
                     android:layout_marginLeft="15dp"

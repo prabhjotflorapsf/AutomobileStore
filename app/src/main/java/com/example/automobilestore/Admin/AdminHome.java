@@ -37,7 +37,7 @@ public class AdminHome extends AppCompatActivity {
     private FirebaseAuth auth;
     FirebaseFirestore db;
     private FirebaseUser curUser;
-    LinearLayout addOns, services , userLogs;
+    LinearLayout addOns, services , userLogs,PostLogs;
 
 
     @Override
@@ -48,7 +48,6 @@ public class AdminHome extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         welcome = findViewById(R.id.welcome_admin);
         Imlogout = findViewById(R.id.logout_img);
-
         addPost = findViewById(R.id.add_post_admin);
 
         addPost.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +63,7 @@ public class AdminHome extends AppCompatActivity {
         addOns=findViewById(R.id.add_ons_btn);
         services =findViewById(R.id.services_btn);
         userLogs = findViewById(R.id.userLogs);
+        PostLogs = findViewById(R.id.Posts_Logs);
 
         getCount();
 
@@ -93,9 +93,10 @@ public class AdminHome extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(AdminHome.this, Post_Services.class);
                 startActivity(i);
-//                Toast.makeText(AdminHome.this, "clicked", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(AdminHome.this, "clicked", Toast.LENGTH_SHORT).show();
             }
         });
+
         userLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,8 +106,6 @@ public class AdminHome extends AppCompatActivity {
         });
     }
 
-
-
     public void logout() {
         auth = FirebaseAuth.getInstance();
         auth.signOut();
@@ -114,6 +113,7 @@ public class AdminHome extends AppCompatActivity {
         startActivity(i);
         Toast.makeText(getApplicationContext(), "Logout Successfully", Toast.LENGTH_LONG).show();
     }
+
     public void getCount() {
         db = FirebaseFirestore.getInstance();
         //User Count

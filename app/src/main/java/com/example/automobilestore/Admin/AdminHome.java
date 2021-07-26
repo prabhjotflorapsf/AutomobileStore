@@ -85,7 +85,7 @@ public class AdminHome extends AppCompatActivity {
         userLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AdminHome.this , EditDeleteUser.class);
+                Intent i = new Intent(AdminHome.this , AdminEditDeleteUser.class);
                 startActivity(i);
             }
         });

@@ -116,7 +116,10 @@ public class CarDetails extends AppCompatActivity {
                 }
                 if (curUser != null) {
                     UserId = curUser.getUid();
-                    Intent i = new Intent(CarDetails.this, PostAd.class);
+
+                    Intent i = new Intent(CarDetails.this, Report_Activity.class);
+                    i.putExtra("userID",UserId);
+                    i.putExtra("PostId",DocId);
                     startActivity(i);
                     // RefreshData();
                 } else {

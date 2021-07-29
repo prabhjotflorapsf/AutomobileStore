@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
-        <activity android:name=".Loaded_UserLogs"></activity>
+        <activity android:name=".Activity.Report_Activity"></activity>
+        <activity android:name=".Loaded_UserLogs" />
         <activity android:name=".Activity.Services" />
         <activity android:name=".Admin.Post_Services" />
         <activity android:name=".Admin.Post_AddOns" />
@@ -29,7 +30,7 @@
         <activity android:name=".Admin_Profile" />
         <activity android:name=".Admin.admin_forgotpassword" />
         <activity android:name=".Activity.Contact" />
-        <activity android:name=".Admin.AdminEditDeleteUser"/>
+        <activity android:name=".Admin.AdminEditDeleteUser" />
         <activity android:name=".Activity.CarDialog" />
         <activity android:name=".Activity.CarDetails" />
         <activity android:name=".Activity.UpdateAd" />

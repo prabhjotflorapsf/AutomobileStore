@@ -49,7 +49,8 @@ public class CarDetails extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     TextView water;
-    TextView ModelName, price, address, description, overviewFragmentCar;
+    TextView ModelName, price, address, description;
+    ImageView report;
     Button btnbuyCar;
     ImageView like;
     LinearLayout mainLayout;
@@ -80,6 +81,7 @@ public class CarDetails extends AppCompatActivity {
         like = (ImageView) findViewById(R.id.like);
         imageViewPager = findViewById(R.id.imageslider);
         browser = (WebView) findViewById(R.id.browser2);
+        report=(ImageView)findViewById(R.id.report);
         mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
         browser.getSettings().setJavaScriptEnabled(true);
 
@@ -104,7 +106,27 @@ public class CarDetails extends AppCompatActivity {
         getdata(DocId);
         checkWishlist(DocId, like);
         pd.dismiss();
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fstore = FirebaseFirestore.getInstance();
+                curUser = auth.getCurrentUser();
+                if (curUser != null) {
+                    UserId = curUser.getUid();
+                }
+                if (curUser != null) {
+                    UserId = curUser.getUid();
+                    Intent i = new Intent(CarDetails.this, PostAd.class);
+                    startActivity(i);
+                    // RefreshData();
+                } else {
 
+                    CarDialog alert = new CarDialog();
+                    alert.showLoginDialog(CarDetails.this);
+
+                }
+            }
+        });
         btnbuyCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

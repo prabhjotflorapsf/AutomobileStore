@@ -45,8 +45,8 @@ public class Report_Activity extends AppCompatActivity implements View.OnClickLi
 
 
         Bundle extras = getIntent().getExtras();
-        DocId = extras.getString("userID");
-        UserId = extras.getString("PostId");
+        UserId = extras.getString("userID");
+        DocId = extras.getString("PostId");
 
 
 

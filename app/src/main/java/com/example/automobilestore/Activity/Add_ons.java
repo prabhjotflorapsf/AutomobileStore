@@ -104,7 +104,7 @@ public class Add_ons extends AppCompatActivity {
     }
     private void getImage(final String UserID,final String Company,final String Address,final String Link) {
         storageReference = FirebaseStorage.getInstance().getReference();
-        storageReference.child("AddOnsImage/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference.child("images/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 A_List.add(new AddOns(UserID,Company, Address,Link, uri));

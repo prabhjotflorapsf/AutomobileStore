@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutomobileStore">
-        <activity android:name=".Activity.Report_Activity"></activity>
+        <activity android:name=".Admin.Report_list_Activity"></activity>
+        <activity android:name=".Activity.Report_Activity" />
         <activity android:name=".Loaded_UserLogs" />
         <activity android:name=".Activity.Services" />
         <activity android:name=".Admin.Post_Services" />

@@ -46,7 +46,7 @@ public class NotificationsFragment extends Fragment {
     SharedPreferences sp;
 
 
-    private FragmentHomeBinding binding;
+
     public NotificationsFragment() {
         // Required empty public constructor
     }

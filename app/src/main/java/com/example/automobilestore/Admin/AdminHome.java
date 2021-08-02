@@ -31,13 +31,13 @@ public class AdminHome extends AppCompatActivity {
     TextView welcome, logout;
 
     FirebaseAuth firebaseAuth;
-    ImageView Imlogout,addPost;
+    ImageView Imlogout,Report_admin;
 
     TextView Post_count,User_count;
     private FirebaseAuth auth;
     FirebaseFirestore db;
     private FirebaseUser curUser;
-    LinearLayout addOns, services , userLogs,PostLogs;
+    LinearLayout addOns, services , userLogs,PostLogs,report_admin;
 
 
     @Override
@@ -48,15 +48,25 @@ public class AdminHome extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         welcome = findViewById(R.id.welcome_admin);
         Imlogout = findViewById(R.id.logout_img);
-        addPost = findViewById(R.id.add_post_admin);
-
-        addPost.setOnClickListener(new View.OnClickListener() {
+//        addPost = findViewById(R.id.add_post_admin);
+        report_admin=findViewById(R.id.report_admin);
+        report_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PostAd.class);
+                Log.d(TAG, "onClick: reportAdmin");
+                Intent i = new Intent(getApplicationContext(), Report_list_Activity.class);
                 startActivity(i);
             }
         });
+
+//        addPost.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent i = new Intent(getApplicationContext(), PostAd.class);
+//                startActivity(i);
+//            }
+//        });
 
         User_count=findViewById(R.id.tv_ucount);
         Post_count=findViewById(R.id.tv_pcount);
@@ -83,6 +93,7 @@ public class AdminHome extends AppCompatActivity {
         addOns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 //                Toast.makeText(AdminHome.this, "clicked", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(AdminHome.this, Post_AddOns.class);
                 startActivity(i);

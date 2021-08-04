@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.automobilestore.Activity.PostAd;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
+import com.example.automobilestore.admin_postview;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,6 +78,13 @@ public class AdminHome extends AppCompatActivity {
 
         getCount();
 
+        PostLogs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdminHome.this, admin_postview.class);
+                startActivity(i);
+            }
+        });
 
         Imlogout.setOnClickListener(new View.OnClickListener() {
             @Override

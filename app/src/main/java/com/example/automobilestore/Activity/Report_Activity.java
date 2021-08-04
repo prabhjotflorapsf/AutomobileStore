@@ -83,27 +83,27 @@ public class Report_Activity extends AppCompatActivity implements View.OnClickLi
                 Report_Post("It's spam",UserId,DocId);
                 break;
             case R.id.ll2:
-                spam.setBackgroundColor(Color.RED);
+                illegal.setBackgroundColor(Color.RED);
                 Report_Post("Sale of illegal or regulated goods ",UserId,DocId);
                 break;
             case R.id.ll3:
-                spam.setBackgroundColor(Color.RED);
+                bullying.setBackgroundColor(Color.RED);
                 Report_Post("Bullying or harsassment",UserId,DocId);
                 break;
             case R.id.ll4:
-                spam.setBackgroundColor(Color.RED);
+                scam.setBackgroundColor(Color.RED);
                 Report_Post("Scam or fraud",UserId,DocId);
                 break;
             case R.id.ll5:
-                spam.setBackgroundColor(Color.RED);
+                false_info.setBackgroundColor(Color.RED);
                 Report_Post("False information",UserId,DocId);
                 break;
             case R.id.ll6:
-                spam.setBackgroundColor(Color.RED);
+                hate_speech.setBackgroundColor(Color.RED);
                 Report_Post("Hate speech or symbols",UserId,DocId);
                 break;
             case R.id.ll7:
-                spam.setBackgroundColor(Color.RED);
+                smth_else.setBackgroundColor(Color.RED);
                 Main_LL.setVisibility(View.GONE);
                 other_LL.setVisibility(View.VISIBLE);
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.automobilestore.Activity.UpdateAd;
 import com.example.automobilestore.Activity.WebViewCustom;
 import com.example.automobilestore.Admin.Post_Services;
 import com.example.automobilestore.R;
@@ -51,6 +52,14 @@ public class Report_Adapter  extends RecyclerView.Adapter<Report_Adapter.Service
         holder.reason.setText("Reason to Report: \n"+ReportList.get(position).getReason());
         holder.user.setText("Reported By: \n"+ReportList.get(position).getUser());
         Log.d(TAG, "onBindViewHolder: " + 1);
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), UpdateAd.class);
+                i.putExtra("id", ReportList.get(position).getId());
+                context.startActivity(i);
+            }
+        });
 
     }
 

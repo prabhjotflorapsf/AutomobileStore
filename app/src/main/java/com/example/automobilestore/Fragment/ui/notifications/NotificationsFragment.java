@@ -21,7 +21,7 @@ import com.example.automobilestore.Admin.AdminHome;
 import com.example.automobilestore.Admin.admin_signin;
 import com.example.automobilestore.MainActivity;
 import com.example.automobilestore.R;
-import com.example.automobilestore.databinding.FragmentHomeBinding;
+
 import com.example.automobilestore.Fragment.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

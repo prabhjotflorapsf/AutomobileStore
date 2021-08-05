@@ -70,9 +70,9 @@ public class Loaded_UserLogs extends AppCompatActivity {
         public UserLogViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
-            list_email =itemView.findViewById(R.id.user_email);
-            list_name =itemView.findViewById(R.id.user_name);
-            list_phone =itemView.findViewById(R.id.user_phoneno);
+            list_email =itemView.findViewById(R.id.userEmail);
+            list_name =itemView.findViewById(R.id.userName);
+            list_phone =itemView.findViewById(R.id.userPhoneNumber);
 
         }
     }

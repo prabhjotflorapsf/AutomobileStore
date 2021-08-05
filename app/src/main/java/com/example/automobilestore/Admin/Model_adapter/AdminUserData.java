@@ -3,11 +3,21 @@ package com.example.automobilestore.Admin.Model_adapter;
 public class AdminUserData {
     private String Name;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
     public String getName() {
         return Name;
     }
 
-    public AdminUserData(String name, String email, String phone) {
+    public AdminUserData(String id,String name, String email, String phone) {
+        this.id=id;
         Name = name;
         Email = email;
         Phone = phone;

@@ -25,6 +25,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 //for the list of product submitted to the dashboard
 public class PostList extends AppCompatActivity {
     RecyclerView PostListRecycler;
@@ -41,7 +44,7 @@ public class PostList extends AppCompatActivity {
      * variable declarationfor current user
      */
     private FirebaseUser curUser;
-    String userId = null;
+   public String userId = null;
     ArrayList<PostListModel> postlist = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,12 @@ public class PostList extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         curUser = auth.getCurrentUser();
 
+        if( getIntent().getExtras() != null)
+        {
+            Bundle extras = getIntent().getExtras();
+            userId = extras.getString("id");
+            //do here
+        }
         if (curUser != null) {
             userId = curUser.getUid(); //Do what you need to do with the id
         }
@@ -58,6 +67,7 @@ public class PostList extends AppCompatActivity {
     }
 
     private void getCarList() {
+        Log.d(TAG, "getCarList: "+userId);
         db = FirebaseFirestore.getInstance();
         db.collection("Car")
                 .whereEqualTo("UserID", userId)

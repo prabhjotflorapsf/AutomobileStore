@@ -29,6 +29,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 public class AdminEditDeleteUser extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -73,7 +75,13 @@ public class AdminEditDeleteUser extends AppCompatActivity {
                         }
 
                         for (DocumentChange dc : value.getDocumentChanges()) {
-                            userDataArrayList.add(dc.getDocument().toObject(AdminUserData.class));
+                           // dc.getDocument().getId();
+                            Log.d(TAG, "onEvent: "+ dc.getDocument().getId());
+                            String id=dc.getDocument().getId();
+                            String Email=(String) dc.getDocument().get("Email");
+                            String phone=(String) dc.getDocument().get("Phone");
+                            String name=(String) dc.getDocument().get("Name");
+                            userDataArrayList.add(new AdminUserData(id,name,Email,phone));
                         }
                         adminUserDataAdapter.notifyDataSetChanged();
                         if (progressDialog.isShowing())

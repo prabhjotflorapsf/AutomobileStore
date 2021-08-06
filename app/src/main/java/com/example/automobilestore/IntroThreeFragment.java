@@ -31,7 +31,6 @@ public class IntroThreeFragment extends Fragment {
 
         done = view.findViewById(R.id.slideThreeFinish);
         back = view.findViewById(R.id.slideThreeBack);
-        skip = view.findViewById(R.id.skipThree);
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,14 +44,6 @@ public class IntroThreeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 viewPager.setCurrentItem(1);
-            }
-        });
-
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplication(),MainActivity.class);
-                startActivity(intent);
             }
         });
 

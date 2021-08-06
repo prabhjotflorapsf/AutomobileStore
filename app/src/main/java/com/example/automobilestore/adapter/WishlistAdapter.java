@@ -91,9 +91,6 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.Wishli
                         }
                     }
 
-
-//
-
                 });
             }
         });

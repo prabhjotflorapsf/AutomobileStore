@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.automobilestore.MainActivity;
+import com.example.automobilestore.IntroActivity;
 import com.example.automobilestore.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -16,13 +16,10 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent=new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        handler.postDelayed(() -> {
+            Intent intent=new Intent(SplashScreen.this, IntroActivity.class);
+            startActivity(intent);
+            finish();
         },1500);
     }
 }

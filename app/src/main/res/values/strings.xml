@@ -6,6 +6,18 @@
     <string name="title_dashboard">Wishlist</string>
     <string name="title_notifications">Account</string>
 
+    <string name="title1">Welcome</string>
+    <string name="title2">Buy a car</string>
+    <string name="title3">Sell your car</string>
+    <string name="title_description">This app helps you find
+    your perfectly budget friendly car.</string>
+    <string name="title_description2">Find your dream car and
+        check available design features.</string>
+    <string name="title_description3">Earn money by selling your car. Make a price and attract buyers.</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="done">Done</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="confirm_new_password">Confirm New Password*</string>

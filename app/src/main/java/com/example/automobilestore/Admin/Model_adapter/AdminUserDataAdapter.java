@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -73,7 +74,9 @@ public class AdminUserDataAdapter extends RecyclerView.Adapter<AdminUserDataAdap
         holder.delete_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseFirestore fstore = FirebaseFirestore.getInstance();
+//                PostDelete(adminUserData.getId());
+                             FirebaseFirestore fstore = FirebaseFirestore.getInstance();
+
                 DocumentReference docRef = fstore.collection("User").document(adminUserData.getId());
                 docRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -93,6 +96,7 @@ public class AdminUserDataAdapter extends RecyclerView.Adapter<AdminUserDataAdap
                             }
                         });
             }
+
         });
     }
 
@@ -109,8 +113,8 @@ public class AdminUserDataAdapter extends RecyclerView.Adapter<AdminUserDataAdap
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                     //docref.document(document.getId()).delete();
-
+                     docref.document(document.getId()).delete();
+                        Log.d(TAG, "onComplete: "+document.getId());
                     }
 
                 } else {

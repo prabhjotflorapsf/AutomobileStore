@@ -57,6 +57,7 @@ public class Add_ons extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ons);
+
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.refresh);
 
         image = new ImageView[]{upload, selectedImage1, selectedImage2, selectedImage3};
@@ -77,6 +78,7 @@ public class Add_ons extends AppCompatActivity {
     }
     private void getData() {
         fstore = FirebaseFirestore.getInstance();
+
         fstore.collection("AddOns").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
@@ -104,7 +106,7 @@ public class Add_ons extends AppCompatActivity {
     }
     private void getImage(final String UserID,final String Company,final String Address,final String Link) {
         storageReference = FirebaseStorage.getInstance().getReference();
-        storageReference.child("images/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference.child("AddOnsImage/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 A_List.add(new AddOns(UserID,Company, Address,Link, uri));

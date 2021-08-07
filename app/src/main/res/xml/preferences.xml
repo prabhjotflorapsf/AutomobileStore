@@ -42,6 +42,13 @@
     </PreferenceCategory>
     <PreferenceCategory>
         <Preference
+            android:icon="@drawable/languages"
+            app:key="Language"
+            app:summary="change the Language"
+            app:title="Language" />
+    </PreferenceCategory>
+    <PreferenceCategory>
+        <Preference
             android:icon="@drawable/logout"
             app:key="logout"
             app:summary="Logout from the application"

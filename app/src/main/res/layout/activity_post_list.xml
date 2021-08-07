@@ -37,4 +37,17 @@
         android:layout_below="@id/toolbar"
         tools:listitem="@layout/postlist_item" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        android:text="this User Don't have any Post"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        />
+
 </RelativeLayout>

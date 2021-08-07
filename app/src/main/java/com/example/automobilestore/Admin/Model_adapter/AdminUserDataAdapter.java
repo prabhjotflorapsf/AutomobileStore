@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,6 +61,9 @@ public class AdminUserDataAdapter extends RecyclerView.Adapter<AdminUserDataAdap
         holder.Name.setText(adminUserData.getName());
         holder.Email.setText(adminUserData.getEmail());
         holder.Phone.setText(adminUserData.getPhone());
+
+        Picasso.get().load(adminUserData.getImage()).fit().into(holder.profile_image);
+
         Log.d(TAG, "onBindViewHolder: "+adminUserData.getId());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +136,7 @@ public class AdminUserDataAdapter extends RecyclerView.Adapter<AdminUserDataAdap
     public static class AdminUserDataViewHolder extends RecyclerView.ViewHolder {
 
         TextView Name , Email , Phone;
-        ImageView delete_btn;
+        ImageView delete_btn,profile_image;
         public AdminUserDataViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
@@ -140,6 +144,8 @@ public class AdminUserDataAdapter extends RecyclerView.Adapter<AdminUserDataAdap
             Email = itemView.findViewById(R.id.userEmail);
             Phone = itemView.findViewById(R.id.userPhoneNumber);
             delete_btn=itemView.findViewById(R.id.delete_btn);
+            profile_image=itemView.findViewById(R.id.profile_image);
+            Log.d(TAG, "AdminUserDataViewHolder: ");
         }
     }
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.automobilestore.Others.UserLogs;
@@ -66,6 +67,7 @@ public class Loaded_UserLogs extends AppCompatActivity {
         private TextView list_name;
         private TextView list_email;
         private TextView list_phone;
+        ImageView profile_img;
 
         public UserLogViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -73,6 +75,7 @@ public class Loaded_UserLogs extends AppCompatActivity {
             list_email =itemView.findViewById(R.id.userEmail);
             list_name =itemView.findViewById(R.id.userName);
             list_phone =itemView.findViewById(R.id.userPhoneNumber);
+            profile_img=itemView.findViewById(R.id.profile_image);
 
         }
     }

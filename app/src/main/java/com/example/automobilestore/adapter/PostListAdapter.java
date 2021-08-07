@@ -52,6 +52,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
 
     @Override
     public void onBindViewHolder(@NonNull final PostListViewHolder holder, final int position) {
+
         Picasso.get().load(postlist.get(position).getImage()).fit().into(holder.image);
         holder.Price.setText("Price:- " + postlist.get(position).getAmount() + "$");
         holder.Year.setText("Year:- " + postlist.get(position).getYear());

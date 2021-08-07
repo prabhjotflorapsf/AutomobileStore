@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.automobilestore.R;
 import com.example.automobilestore.adapter.PostListAdapter;
@@ -46,6 +48,7 @@ public class PostList extends AppCompatActivity {
     private FirebaseUser curUser;
    public String userId = null;
     ArrayList<PostListModel> postlist = new ArrayList<>();
+    TextView textView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class PostList extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         curUser = auth.getCurrentUser();
+        textView2=findViewById(R.id.textView2);
+        textView2.setVisibility(View.VISIBLE);
 
         if( getIntent().getExtras() != null)
         {
@@ -79,6 +84,7 @@ public class PostList extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("PostList", document.getId() + " => " + document.getData());
                                 String id = document.getId();
+                                textView2.setVisibility(View.GONE);
                                 String Model = (String) document.getData().get("Model");
                                 String price = (String) document.getData().get("Amount");
                                 String type = (String) document.getData().get("Transmission");
@@ -87,10 +93,12 @@ public class PostList extends AppCompatActivity {
                             }
                             setPostListRecycler();
                         } else {
+
                             Log.d("TAG", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
     }
 
 
@@ -101,6 +109,7 @@ public class PostList extends AppCompatActivity {
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
                 postlist.add(new PostListModel(id, Model, Type, Year, Price, uri));
+
                 postlistAdapter.notifyDataSetChanged();
 
             }
@@ -120,6 +129,11 @@ public class PostList extends AppCompatActivity {
         PostListRecycler.setLayoutManager(layoutManager);
         postlistAdapter = new PostListAdapter(this, postlist);
         PostListRecycler.setAdapter(postlistAdapter);
+//        if (postlist.size()<=0){
+//            textView2.setVisibility(View.VISIBLE);
+//        }else{
+//            textView2.setVisibility(View.GONE);
+//        }
     }
 
     @Override
@@ -128,5 +142,6 @@ public class PostList extends AppCompatActivity {
         postlist.clear();
         postlistAdapter.notifyDataSetChanged();
         getCarList();
+
     }
 }

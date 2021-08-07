@@ -162,7 +162,7 @@
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#3cb6d3"
                 android:singleLine="true"
-                android:text="Contact Owner" />
+                android:text="@string/Contact_Owner" />
 
             <view
                 android:id="@+id/viewPager"

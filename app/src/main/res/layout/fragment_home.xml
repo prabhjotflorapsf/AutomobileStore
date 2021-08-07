@@ -25,9 +25,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="7dp"
         android:layout_marginTop="3dp"
-        
+
         android:fontFamily="@font/semibold"
-        android:text="Choose Your Car"
+        android:text="@string/Choose_Your_Car"
         android:textColor="#272677"
         android:textSize="24sp" />
 
@@ -44,7 +44,7 @@
         android:background="@drawable/search_bg"
         android:drawableLeft="@drawable/ic_search_black_24dp"
         android:ems="10"
-        android:hint="Search Model, City, Car Type"
+        android:hint="@string/hint"
         android:inputType="text" />
 
     <ImageView

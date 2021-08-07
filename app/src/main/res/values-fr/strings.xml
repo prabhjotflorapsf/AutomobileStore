@@ -58,4 +58,27 @@
     <string name="Address">Adresse</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="update_ad">mise à jour_annonce</string>
+    <string name="Choose_Your_Car">Choisissez votre voiture</string>
+    <string name="hint">Entrez la clé de recherche</string>
+    <string name="Passengers">Passagères</string>
+    <string name="Price">Prix</string>
+    <string name="Profile">Profil</string>
+    <string name="Name">Nom</string>
+    <string name="Email">Email</string>
+    <string name="reset_password">réinitialiser le mot de passe</string>
+    <string name="Name_Email_Phone">Nom, e-mail, téléphone</string>
+    <string name="Manage_Posts">Gérer les publications</string>
+    <string name="Update_Delete_your_old_posts">Mettre à jour, supprimer vos anciens messages</string>
+    <string name="see_new_Add_Ons_package">voir nouveau Add-Ons paquet</string>
+    <string name="find_Maintenance_services">"trouver Maintenance &amp; prestations de service "</string>
+    <string name="change_the_Language">changer la langue</string>
+    <string name="Maintenance_Services">Entretien &amp; Prestations de service</string>
+    <string name="Language">Langue</string>
+    <string name="Logout_from_the_application">Logout de l\'application</string>
+    <string name="Contact_Owner">Contacter le Propriétaire</string>
+    <string name="Car_Color">Couleur de la voiture</string>
+    <string name="Overview">Aperçu</string>
+    <string name="Equipment">Équipement</string>
+    <string name="Safety_And_Security">Sûreté et sécurité</string>
+    <string name="Specification">spécification</string>
 </resources>

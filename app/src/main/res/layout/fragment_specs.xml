@@ -9,7 +9,7 @@
         android:id="@+id/d_specs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Specification"
+        android:text="@string/Specification"
         android:textColor="#2F4F4F"
         android:textSize="25sp" />
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            android:text="Power(Kw)"
+            android:text="@string/engine_power_kw"
             android:textColor="#2F4F4F"
             android:textSize="20sp" />
     </LinearLayout>
@@ -159,7 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            android:text="Equipment"
+            android:text="@string/Equipment"
             android:textColor="#2F4F4F"
             android:textSize="20sp" />
     </LinearLayout>
@@ -283,7 +283,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            android:text=" Safety And Security"
+            android:text="@string/Safety_And_Security"
             android:textColor="#2F4F4F"
             android:textSize="20sp" />
     </LinearLayout>

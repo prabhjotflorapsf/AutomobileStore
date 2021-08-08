@@ -13,54 +13,63 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="123dp">
+        android:layout_height="match_parent">
 
 
         <ImageView
             android:id="@+id/carv_image"
-            android:layout_width="168dp"
-            android:layout_height="125dp"
+            android:layout_width="403dp"
+            android:layout_height="204dp"
+
             android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/v_name"
-            android:layout_width="206dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="280dp"
+            android:layout_height="42dp"
             android:fontFamily="@font/semibold"
             android:text="Car Name"
             android:textColor="#091020"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@+id/Condition_tv"
-            app:layout_constraintTop_toBottomOf="@+id/Condition_tv" />
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carv_image"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/v_amount"
-            android:layout_width="82dp"
-            android:layout_height="32dp"
+            android:layout_width="111dp"
+            android:layout_height="43dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
             android:fontFamily="@font/semibold"
             android:text="$6000"
             android:textColor="#FF6813"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/v_name"
+            app:layout_constraintTop_toBottomOf="@+id/carv_image" />
 
         <TextView
             android:id="@+id/Condition_tv"
-            android:layout_width="70dp"
-            android:layout_height="22dp"
+            android:layout_width="45dp"
+            android:layout_height="24dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
             android:fontFamily="@font/regular"
             android:text="NEW"
             android:textColor="#F06941"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/carv_image"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 

@@ -50,7 +50,7 @@ public class Report_list_Activity extends AppCompatActivity {
     ImageView selectedImage, selectedImage1, selectedImage2, selectedImage3, upload,del;
     ImageView[] image;
     FirebaseFirestore fstore;
-    String User_Name,Reason;
+    String User_Name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,11 +86,12 @@ public class Report_list_Activity extends AppCompatActivity {
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                         Reason = (String) document.getData().get("Reason");
+                         String Reason = (String) document.getData().get("Reason");
                         String UserId = (String) document.getData().get("UserId");
                        String Post_Id = (String) document.getData().get("DocId");
                         String document_ID=document.getId();
-                        getuserId(UserId,Post_Id);
+
+                        getuserId(UserId,Post_Id,Reason);
 //                        Toast.makeText(Report_list_Activity.this, "heyy user id", Toast.LENGTH_SHORT).show();
 //                        Log.d(TAG, "onComplete: "+User_Name);
 
@@ -105,7 +106,7 @@ public class Report_list_Activity extends AppCompatActivity {
 
 
 
-    private void getuserId(String temp,String Post_id) {
+    private void getuserId(String temp,String Post_id,String reason) {
         fstore = FirebaseFirestore.getInstance();
         Log.d(TAG, "getuserId: "+temp);
         DocumentReference docRef = fstore.collection("User").document(temp);
@@ -116,7 +117,7 @@ public class Report_list_Activity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         String email= (String) document.getData().get("Email");
-                        getImage(email,Post_id);
+                        getImage(email,Post_id,reason);
                         Log.d(TAG, "onComplete: "+User_Name);
 
                     }
@@ -125,13 +126,13 @@ public class Report_list_Activity extends AppCompatActivity {
         });
     }
 
-    private void getImage(final String email,final String post_id) {
+    private void getImage(final String email,final String post_id,final String reason) {
         storageReference = FirebaseStorage.getInstance().getReference();
         Log.d(TAG, "getImage: "+post_id);
         storageReference.child("images/" + post_id + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                A_List.add(new Report_List(post_id,email, Reason,uri));
+                A_List.add(new Report_List(post_id,email, reason,uri));
                 //Log.d(TAG, "onSuccess: "+User_Name);
                 AddOnsAdapter.notifyDataSetChanged();
 

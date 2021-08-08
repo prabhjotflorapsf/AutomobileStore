@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import com.example.automobilestore.Fragment.ui.home.HomeFragment;
 import com.example.automobilestore.R;
-import com.example.automobilestore.adapter.Horizontal_Car_Adapter;
+
 import com.example.automobilestore.adapter.Vertical_Car_Adapter;
 import com.example.automobilestore.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,8 +53,7 @@ public class PostAd extends AppCompatActivity {
     ImageView selectedImage, selectedImage1, selectedImage2, selectedImage3, upload;
     ImageView[] image;
     FirebaseStorage storage;
-    Vertical_Car_Adapter VerticalAdapter;
-    Horizontal_Car_Adapter HorizontalAdapter;
+
     StorageReference storageReference;
     ArrayList<Uri> contenturi = new ArrayList<Uri>();
     private TextInputLayout et_model,et_address, et_description, et_amount, et_phone_number, et_seaters, et_Car_Classification, et_color, et_power, et_year;

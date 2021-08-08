@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.Button;
@@ -135,7 +136,7 @@ public class Post_Services extends AppCompatActivity {
         } else if (l.isEmpty()) {
             Toast.makeText(Post_Services.this, "Please Enter Url", Toast.LENGTH_LONG).show();
             return;
-        }else if(URLUtil.isValidUrl(l)){
+        }else if(! Patterns.WEB_URL.matcher(l).matches()){
             Toast.makeText(Post_Services.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
         } else {
             final ProgressDialog pd;
@@ -222,6 +223,7 @@ public class Post_Services extends AppCompatActivity {
                 Log.d(TAG, "onSuccess: "+uri);
                 ServicesAdapter.notifyDataSetChanged();
 
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -244,6 +246,7 @@ public class Post_Services extends AppCompatActivity {
                 public void onSuccess(Void aVoid) {
                     // File deleted successfully
                     Log.d(TAG, "onSuccess: deleted");
+                    finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -271,7 +274,7 @@ public class Post_Services extends AppCompatActivity {
             return;
         }else if (photos < 1) {
             Toast.makeText(Post_Services.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
-        }else if(URLUtil.isValidUrl(l)){
+        }else if(! Patterns.WEB_URL.matcher(l).matches()){
             Toast.makeText(Post_Services.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
         }
         else {

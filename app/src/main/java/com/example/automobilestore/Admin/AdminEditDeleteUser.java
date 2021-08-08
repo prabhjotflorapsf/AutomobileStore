@@ -57,7 +57,9 @@ public class AdminEditDeleteUser extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.userList);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         userDataArrayList = new ArrayList<AdminUserData>();

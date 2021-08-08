@@ -86,9 +86,9 @@ public class Horizontal_Car_Adapter extends RecyclerView.Adapter<Horizontal_Car_
         public HorizontalViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            carh_image = itemView.findViewById(R.id.carh_image);
-            h_amount = itemView.findViewById(R.id.h_amount);
-            h_name = itemView.findViewById(R.id.h_name);
+            carh_image = itemView.findViewById(R.id.carv_image);;
+            h_amount = itemView.findViewById(R.id.v_amount);
+            h_name = itemView.findViewById(R.id.v_name);
 
 
 

@@ -145,8 +145,8 @@ public class NotificationsFragment extends Fragment {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(getActivity().getApplicationContext(), admin_signin.class);
-                Intent i = new Intent(getActivity().getApplicationContext(), AdminHome.class);
+                Intent i = new Intent(getActivity().getApplicationContext(), admin_signin.class);
+//                Intent i = new Intent(getActivity().getApplicationContext(), AdminHome.class);
                 startActivity(i);
             }
         });

@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.Button;
@@ -29,7 +30,7 @@ import com.example.automobilestore.Activity.UpdateAd;
 import com.example.automobilestore.Admin.Model_adapter.AddOns;
 import com.example.automobilestore.Admin.Model_adapter.AddOns_Adapter;
 import com.example.automobilestore.R;
-import com.example.automobilestore.adapter.Horizontal_Car_Adapter;
+
 import com.example.automobilestore.model.HorizontalCarData;
 import com.example.automobilestore.model.VerticalCarData;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -143,7 +144,7 @@ public class Post_AddOns extends AppCompatActivity {
         } else if (l.isEmpty()) {
             Toast.makeText(Post_AddOns.this, "Please Enter Url", Toast.LENGTH_LONG).show();
             return;}
-        else if(URLUtil.isValidUrl(l)){
+        else if(! Patterns.WEB_URL.matcher(l).matches()){
             Toast.makeText(Post_AddOns.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
         }
 //        } else if (photos < 1) {
@@ -234,6 +235,7 @@ public class Post_AddOns extends AppCompatActivity {
                 Log.d(TAG, "onSuccess: "+uri);
                 AddOnsAdapter.notifyDataSetChanged();
 
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -256,6 +258,7 @@ public class Post_AddOns extends AppCompatActivity {
                 public void onSuccess(Void aVoid) {
                     // File deleted successfully
                     Log.d(TAG, "onSuccess: deleted");
+                    finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -283,7 +286,7 @@ public class Post_AddOns extends AppCompatActivity {
             return;
         }else if (photos < 1) {
             Toast.makeText(Post_AddOns.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
-        }else if(URLUtil.isValidUrl(l)){
+        }else if( !Patterns.WEB_URL.matcher(l).matches()){
             Toast.makeText(Post_AddOns.this, "Please Enter Proper URl", Toast.LENGTH_LONG).show();
         }else {
             final ProgressDialog pd;

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAEFE6"
+    tools:context=".Fragment.ui.home.HomeFragment">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-5dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="1dp"
+        android:background="#DBE4E4">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/account"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp" />
+
+        <EditText
+            android:id="@+id/search_et"
+            android:layout_width="348dp"
+            android:layout_height="41dp"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="47dp"
+            android:background="@drawable/search_bg"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:ems="10"
+            android:hint="@string/hint"
+            android:inputType="text"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/semibold"
+            android:text="@string/Choose_Your_Car"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="normal" />
+
+        <ImageButton
+            android:id="@+id/search_btn"
+            android:layout_width="70dp"
+            android:layout_height="52dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="right"
+            android:layout_marginEnd="5dp"
+            android:background="#FAC647"
+            app:srcCompat="@drawable/search" />
+
+        <ImageButton
+            android:id="@+id/filter"
+            android:layout_width="50dp"
+            android:layout_height="52dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="right"
+            android:layout_marginEnd="5dp"
+            android:background="#FAC647"
+            app:srcCompat="@drawable/filter" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_post_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="81dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add" />
+
+    <ImageView
+        android:id="@+id/grid_icon"
+        android:layout_width="62dp"
+        android:layout_height="41dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="68dp"
+        android:background="#FAEFE6"
+        android:visibility="gone"
+        app:srcCompat="@drawable/gridview" />
+
+    <ImageView
+        android:id="@+id/list_icon"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="6dp"
+        android:background="#FAEFE6"
+        app:srcCompat="@drawable/listview" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_vcar"
+        android:layout_width="match_parent"
+        android:layout_height="558dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="99dp"
+
+        android:layout_marginBottom="2dp" />
+
+
+</RelativeLayout>

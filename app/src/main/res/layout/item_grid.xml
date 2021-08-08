@@ -5,56 +5,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     app:cardCornerRadius="15dp"
-    android:elevation="5dp"
+    android:elevation="2dp"
     android:layout_marginStart="16dp"
+    android:layout_marginTop="10dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="235dp"
+        android:layout_width="198dp"
         android:layout_height="match_parent">
 
 
         <ImageView
-            android:id="@+id/carh_image"
-            android:layout_width="237dp"
-            android:layout_height="146dp"
+            android:id="@+id/carv_image"
+            android:layout_width="198dp"
+            android:layout_height="147dp"
             android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
 
         <TextView
-            android:id="@+id/h_name"
-            android:layout_width="146dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:id="@+id/Condition_tv"
+            android:layout_width="42dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:fontFamily="@font/regular"
+            android:text="NEW"
+            android:textColor="#F06941"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/v_name"
+            android:layout_width="114dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="1dp"
             android:fontFamily="@font/semibold"
             android:text="Car Name"
             android:textColor="#091020"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/h_amount"
+            app:layout_constraintEnd_toStartOf="@+id/v_amount"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/carh_image"
+            app:layout_constraintTop_toBottomOf="@+id/carv_image"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/h_amount"
-            android:layout_width="76dp"
-            android:layout_height="32dp"
+            android:id="@+id/v_amount"
+            android:layout_width="72dp"
+            android:layout_height="30dp"
             android:layout_marginStart="1dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
             android:fontFamily="@font/semibold"
             android:text="$2500"
             android:textColor="#FF6813"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/h_name"
-            app:layout_constraintTop_toTopOf="@+id/h_name" />
+            app:layout_constraintStart_toEndOf="@+id/v_name"
+            app:layout_constraintTop_toTopOf="@+id/v_name"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

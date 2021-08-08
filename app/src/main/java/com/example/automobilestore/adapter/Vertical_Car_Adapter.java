@@ -2,6 +2,7 @@ package com.example.automobilestore.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,24 +20,33 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 
 public class Vertical_Car_Adapter extends RecyclerView.Adapter<Vertical_Car_Adapter.VerticalViewHolder> {
 
     Context context;
     List<VerticalCarData> Vertiacllist;
 
+    String LayoutType="";
 
-
-    public Vertical_Car_Adapter(Context context, List<VerticalCarData> asiaFoodList) {
+    public Vertical_Car_Adapter(Context context, List<VerticalCarData> asiaFoodList,String LayoutType) {
         this.context = context;
         this.Vertiacllist = asiaFoodList;
+        this.LayoutType=LayoutType;
     }
 
     @NonNull
     @Override
     public VerticalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+        Log.d(TAG, "onCreateViewHolder: "+LayoutType);
+        if(LayoutType=="Grid"){
+            view = LayoutInflater.from(context).inflate(R.layout.item_grid, parent, false);
+        }else {
+             view = LayoutInflater.from(context).inflate(R.layout.veritcal_item, parent, false);
 
-        View view = LayoutInflater.from(context).inflate(R.layout.veritcal_item, parent, false);
+        }
         return new VerticalViewHolder(view);
     }
 

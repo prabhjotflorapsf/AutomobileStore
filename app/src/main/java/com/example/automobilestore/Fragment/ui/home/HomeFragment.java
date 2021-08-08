@@ -21,16 +21,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.utils.Oscillator;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.automobilestore.Activity.CarDialog;
 import com.example.automobilestore.Activity.PostAd;
+import com.example.automobilestore.Activity.ProfileDetails;
+import com.example.automobilestore.Admin.Model_adapter.AdminUserData;
 import com.example.automobilestore.R;
 import com.example.automobilestore.adapter.Vertical_Car_Adapter;
-import com.example.automobilestore.adapter.Horizontal_Car_Adapter;
+
 
 import com.example.automobilestore.model.VerticalCarData;
 import com.example.automobilestore.model.HorizontalCarData;
@@ -48,14 +52,17 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static android.content.ContentValues.TAG;
 
 public class HomeFragment extends Fragment {
-    
+
     FloatingActionButton add_btn;
     RecyclerView HorizontalRecycler, VerticalRecycler;
     Vertical_Car_Adapter VerticalAdapter;
@@ -63,12 +70,10 @@ public class HomeFragment extends Fragment {
     private FirebaseAuth auth;
     FirebaseFirestore db;
     private FirebaseUser curUser;
-    List<HorizontalCarData> HorizontalList = new ArrayList<>();
     List<VerticalCarData> VerticalList = new ArrayList<>();
-    Horizontal_Car_Adapter HorizontalAdapter;
     boolean priceChanged = false;
     boolean passengerChanged = false;
-    ImageView filter;
+    ImageView filter,imageView3,list,grid;
     float min = 0, max = 100000;
     float minp = 1, maxp = 10;
     String UserId;
@@ -76,6 +81,9 @@ public class HomeFragment extends Fragment {
     SwipeRefreshLayout swipeContainer;
     EditText search;
     int count=0;
+    String LayoutType="List";
+
+    CircleImageView profile_image2;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -83,14 +91,69 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         add_btn=v.findViewById(R.id.add_post_btn);
+        profile_image2=v.findViewById(R.id.profile_image2);
         search=v.findViewById(R.id.search_et);
-        HorizontalRecycler = v.findViewById(R.id.rv_hcar);
         VerticalRecycler = v.findViewById(R.id.rv_vcar);
+        imageView3=v.findViewById(R.id.imageView3);
+        list=v.findViewById(R.id.list_btn);
+        grid=v.findViewById(R.id.grid_btn);
+    profile_image2.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            fstore = FirebaseFirestore.getInstance();
+            curUser = auth.getCurrentUser();
+            if (curUser != null) {
+                UserId = curUser.getUid();
+            }
+            if (curUser != null) {
+                UserId = curUser.getUid();
+                Intent i = new Intent(getActivity().getApplicationContext(), ProfileDetails.class);
+                startActivity(i);
+                // RefreshData();
+            } else {
+
+                CarDialog alert = new CarDialog();
+                alert.showLoginDialog(getActivity());
+
+            }
+
+        }
+    });
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search.setVisibility(View.VISIBLE);
+                imageView3.setVisibility(View.GONE);
+                list.setVisibility(View.GONE);
+                grid.setVisibility(View.GONE);
+            }
+        });
         auth = FirebaseAuth.getInstance();
 
 
 
+                   getProfile();
 
+            list.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    grid.setVisibility(View.VISIBLE);
+                    list.setVisibility(View.GONE);
+                    LayoutType="List";
+                    setVertical();
+
+                }
+            });
+            grid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    list.setVisibility(View.VISIBLE);
+                    grid.setVisibility(View.GONE);
+                    LayoutType="Grid";
+                    setVertical();
+
+                }
+            });
 ////        RefreshData();
 //         Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
@@ -120,9 +183,9 @@ public class HomeFragment extends Fragment {
                 }
                 if (curUser != null) {
                     UserId = curUser.getUid();
-                Intent i = new Intent(getActivity().getApplicationContext(), PostAd.class);
-                startActivity(i);
-               // RefreshData();
+                    Intent i = new Intent(getActivity().getApplicationContext(), PostAd.class);
+                    startActivity(i);
+                    // RefreshData();
                 } else {
 
                     CarDialog alert = new CarDialog();
@@ -139,44 +202,82 @@ public class HomeFragment extends Fragment {
                 filter(getActivity());
             }
         });
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-               String s=search.getText().toString().toLowerCase();
-
-//                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
-                if(s.isEmpty()||s==null) {
-                    Log.d(TAG, "onClick: hellooooo");
-                    RefreshData();
-                }else {
-
-                    Search(search.getText().toString());
-                }
-            }
-        });
-
-
-
-//        search.setOnKeyListener(new View.OnKeyListener() {
+//        search.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//            public void onClick(View v) {
+//
 //                String s=search.getText().toString().toLowerCase();
 //
 ////                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
 //                if(s.isEmpty()||s==null) {
 //                    Log.d(TAG, "onClick: hellooooo");
+//                    search.setVisibility(View.GONE);
+//                    imageView3.setVisibility(View.VISIBLE);
 //                    RefreshData();
 //                }else {
 //
 //                    Search(search.getText().toString());
 //                }
-//                return false;
 //            }
+//
 //        });
 
 
+
+        search.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                String s=search.getText().toString().toLowerCase();
+
+//                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
+                if(s.isEmpty()||s==null) {
+                    Log.d(TAG, "onClick: hellooooo");
+                    search.setVisibility(View.GONE);
+                    imageView3.setVisibility(View.VISIBLE);
+                    if (LayoutType=="Grid"){
+                        list.setVisibility(View.VISIBLE);
+
+                    }else {
+                        grid.setVisibility(View.VISIBLE);
+                    }
+                    RefreshData();
+                }else {
+
+                    Search(search.getText().toString());
+                }
+                return false;
+            }
+        });
+
+
         return v;
+    }
+
+    private void getProfile() {
+        curUser = auth.getCurrentUser();
+        if (curUser != null) {
+            UserId = curUser.getUid();
+
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            storageReference.child("images/Profile/" + UserId + ".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    // Got the download URL for 'users/me/profile.png'
+                    Log.d(Oscillator.TAG, "onSuccess: "+uri);
+                    Picasso.get().load(uri).fit().into(profile_image2);
+
+                    Log.d(Oscillator.TAG, "onSuccess: "+uri);
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+
+                }
+            });
+        }
     }
 
     private void Search(String search_text) {
@@ -205,7 +306,7 @@ public class HomeFragment extends Fragment {
                                 Log.d("search Data", "search calll2");
                                 String Model = (String) document.getData().get("Model");
                                 Float Amount = Float.parseFloat(String.valueOf(document.getData().get("Amount")));
-                                String Address = (String) document.getData().get("Address");
+                                String condition = (String) document.getData().get("Conditon");
                                 String Classification = (String) document.getData().get("Classification");
                                 Log.d("search Data", "search calll3");
                                 int Seaters = Integer.parseInt(String.valueOf(document.getData().get("Seaters")));
@@ -220,24 +321,23 @@ public class HomeFragment extends Fragment {
 //                                if ((Model.toLowerCase()).startsWith(finalSearch_text) || (Address.toLowerCase()).startsWith(finalSearch_text) || (Classification.toLowerCase()).startsWith(finalSearch_text)) {
                                 if ((Model.toLowerCase()).startsWith(search_text)){
 
-                                    getSearch(UserID, Model, Amount.toString());
-                                    setHorizontal();
+                                    getSearch(UserID, Model, Amount.toString(),condition);
+                                  setVertical();
 
                                 } else {
-                                    HorizontalList.clear();
+
                                     VerticalList.clear();
-                                    setHorizontal();
                                     setVertical();
-                                   // Toast.makeText(getActivity().getApplicationContext(), "Oops No Cars Found", Toast.LENGTH_LONG).show();
+                                    // Toast.makeText(getActivity().getApplicationContext(), "Oops No Cars Found", Toast.LENGTH_LONG).show();
                                 }
                             }
-                            }
+                        }
                     }
                 });
     }
 
     public void RefreshData() {
-        HorizontalList.clear();
+
         VerticalList.clear();
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -262,7 +362,6 @@ public class HomeFragment extends Fragment {
                                 String Conditon=(String) document.getData().get("Conditon");
                                 String UserID=document.getId();
                                 getImage(UserID,Model,Amount,Conditon);
-                                setHorizontal();
                                 setVertical();
 
                                 Log.d("modellll", "modellll" + Model);
@@ -277,22 +376,22 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
-    private void setHorizontal() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-        HorizontalRecycler.setLayoutManager(layoutManager);
-        HorizontalAdapter = new Horizontal_Car_Adapter(getActivity(), HorizontalList);
-        HorizontalRecycler.setAdapter(HorizontalAdapter);
-    }
+
     private void setVertical() {
 
+        if (LayoutType == "Grid") {
+            GridLayoutManager Manager = new GridLayoutManager(getContext(),2);
+            VerticalRecycler.setLayoutManager(Manager);
+        }else{
+        LinearLayoutManager Manager= new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
+            VerticalRecycler.setLayoutManager(Manager);
+        }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
-        VerticalRecycler.setLayoutManager(layoutManager);
-        VerticalAdapter = new Vertical_Car_Adapter(getActivity(), VerticalList);
+        VerticalAdapter = new Vertical_Car_Adapter(getActivity(), VerticalList,LayoutType);
         VerticalRecycler.setAdapter(VerticalAdapter);
 
     }
-    private void getSearch(final String UserID,final String Model,final String Amount) {
+    private void getSearch(final String UserID,final String Model,final String Amount,String condition) {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         storageReference.child("images/" + UserID + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -302,8 +401,8 @@ public class HomeFragment extends Fragment {
                 VerticalList.clear();
                 Log.d(TAG, "getSearch: hellooooo");
 
-                HorizontalList.add(new HorizontalCarData(UserID,Model, Amount, uri));
-                HorizontalAdapter.notifyDataSetChanged();
+                VerticalList.add(new VerticalCarData(UserID,Model, Amount, uri,condition));
+                VerticalAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -314,22 +413,13 @@ public class HomeFragment extends Fragment {
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
                 Log.d("TAG", "image got"+Conditon);
-                if(Conditon.equals("New")||Conditon.equals("Yes")){
-                    HorizontalList.add(new HorizontalCarData(UserID,Model, Amount, uri));
-                    HorizontalAdapter.notifyDataSetChanged();
-                }
-                else{
-                    if (Conditon=="New"||Conditon=="Yes"){
-                        VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,"NEW"));
-                    }else{
-                        VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,"OlD"));
-                    }
 
+                VerticalList.add(new VerticalCarData(UserID,Model, Amount,uri,Conditon));
                     setVertical();
                     VerticalAdapter.notifyDataSetChanged();
                 }
 
-            }
+
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -504,7 +594,7 @@ public class HomeFragment extends Fragment {
                 fromSeaters.setText("Max " + maxp);
                 passengerChanged = false;
                 dialog.dismiss();
-                FilterData();
+                RefreshData();
             }
         });
 
@@ -543,16 +633,14 @@ public class HomeFragment extends Fragment {
                                 Log.d("Filterrrrrr Data", "filter amounttttt" +   Amount);
                                 if (priceChanged && passengerChanged) {
                                     if (Amount >= min && Amount <= max && Seaters >= minp && Seaters <= maxp) {
-                                        HorizontalList.clear();
+
                                         VerticalList.clear();
                                         getImage(UserID, Model, Amount.toString(), Conditon);
-                                        setHorizontal();
                                         setVertical();
                                     }
                                     else {
-                                        HorizontalList.clear();
                                         VerticalList.clear();
-                                        setHorizontal();
+
                                         setVertical();
 //                                        Toast.makeText(getActivity().getApplicationContext(),"Oops No Cars Found",Toast.LENGTH_LONG).show();
                                     }

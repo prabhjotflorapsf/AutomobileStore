@@ -20,7 +20,7 @@
 
             <ImageView
                 android:id="@+id/profile_image"
-                android:layout_width="81dp"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_person_24" />
 

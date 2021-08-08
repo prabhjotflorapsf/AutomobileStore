@@ -88,7 +88,7 @@ public class Report_Activity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.ll3:
                 bullying.setBackgroundColor(Color.RED);
-                Report_Post("Bullying or harsassment",UserId,DocId);
+                Report_Post("Bullying or harassment",UserId,DocId);
                 break;
             case R.id.ll4:
                 scam.setBackgroundColor(Color.RED);

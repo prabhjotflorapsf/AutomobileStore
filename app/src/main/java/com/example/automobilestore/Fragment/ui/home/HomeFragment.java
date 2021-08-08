@@ -231,7 +231,10 @@ public class HomeFragment extends Fragment {
                 String s=search.getText().toString().toLowerCase();
 
 //                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
-                if(s.isEmpty()||s==null) {
+                Log.d(TAG, "onKey: "+s.isEmpty()+"  "+keyCode);
+                if(keyCode==66||s.isEmpty()&&keyCode==67){
+
+                    search.setText("");
                     Log.d(TAG, "onClick: hellooooo");
                     search.setVisibility(View.GONE);
                     imageView3.setVisibility(View.VISIBLE);

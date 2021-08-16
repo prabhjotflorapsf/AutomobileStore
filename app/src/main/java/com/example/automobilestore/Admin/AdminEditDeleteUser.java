@@ -70,7 +70,7 @@ public class AdminEditDeleteUser extends AppCompatActivity {
         EventChangeListener();
     }
 
-    private void EventChangeListener() {
+    public void EventChangeListener() {
         firebaseFirestore.collection("User")
                 .orderBy("Name" , Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {

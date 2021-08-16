@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automobilestore.Activity.PostList;
 import com.example.automobilestore.Activity.UpdateAd;
+import com.example.automobilestore.Admin.AdminEditDeleteUser;
 import com.example.automobilestore.Admin.AdminHome;
 import com.example.automobilestore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -89,6 +90,10 @@ public class AdminUserDataAdapter extends RecyclerView.Adapter<AdminUserDataAdap
                         Toast.makeText(context, "User Deleted Successfully", Toast.LENGTH_SHORT).show();
 
                         PostDelete(adminUserData.getId());
+                        Intent i = new Intent(context, AdminHome.class);
+                        context.startActivity(i);
+
+
 
 
                     }

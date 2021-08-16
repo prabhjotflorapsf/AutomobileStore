@@ -2,6 +2,7 @@ package com.example.automobilestore.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class AdminHome extends AppCompatActivity {
     FirebaseFirestore db;
     private FirebaseUser curUser;
     LinearLayout addOns, services , userLogs,PostLogs,report_admin;
+    private SwipeRefreshLayout swipeContainer;
 
 
     @Override
@@ -59,7 +61,16 @@ public class AdminHome extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swp);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+               getCount();
 
+                swipeContainer.setRefreshing(false);
+            }
+        });
 //        addPost.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

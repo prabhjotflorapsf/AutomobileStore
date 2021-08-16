@@ -31,6 +31,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
+
+import static android.content.ContentValues.TAG;
 
 public class NotificationsFragment extends Fragment {
 
@@ -44,7 +53,8 @@ public class NotificationsFragment extends Fragment {
     String AptId, emailStr, passStr;
     private static final String ARG_PARAM2 = "param2";
     SharedPreferences sp;
-
+    boolean check=false;
+    private FirebaseFirestore fstore;
 
 
     public NotificationsFragment() {
@@ -87,6 +97,7 @@ public class NotificationsFragment extends Fragment {
                 String email = Email.getEditText().getText().toString();
                 String pwd = Password.getEditText().getText().toString();
 
+                checkemail(email);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("USEREmailID", email);
                 editor.putString("USERPassword", pwd);
@@ -100,15 +111,28 @@ public class NotificationsFragment extends Fragment {
                 pd = new ProgressDialog(getActivity());
                 pd.setMessage("Loading...");
                 pd.show();
+
                 auth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                        Log.d(TAG, "onComplete: "+check);
+                        if (task.isSuccessful()&&check) {
                             curUser = auth.getCurrentUser();
                             Toast.makeText(getActivity().getApplicationContext(), "Login Success!", Toast.LENGTH_LONG).show();
                             Intent i = new Intent(getActivity(), MainActivity.class);
                             startActivity(i);
-                        } else {
+                        }else if(check==false){
+                            curUser = auth.getCurrentUser();
+                            curUser.delete();
+                            auth = FirebaseAuth.getInstance();
+                            auth.signOut();
+                            Email.getEditText().getText().clear();
+                            Password.getEditText().getText().clear();
+                            Email.setError("Email not exist!");
+                            Email.requestFocus();
+                            pd.dismiss();
+                        }
+                        else {
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidUserException e) {
@@ -158,5 +182,37 @@ public class NotificationsFragment extends Fragment {
             }
         });
         return v;
+    }
+    public void checkemail(String email){
+        fstore = FirebaseFirestore.getInstance();
+
+        fstore.collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int count=0;
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String em= (String) document.getData().get("Email");
+                        Log.d(TAG, "onComplete: "+em);
+                        if(email.equals(em)){
+                            count++;
+
+                        }
+
+                    }
+                    Log.d(TAG, "onComplete: "+count);
+                    if(count>=1){
+                        setBoolean(true);
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    private void setBoolean(boolean b) {
+        check=b;
     }
 }

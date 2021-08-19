@@ -19,6 +19,7 @@ import com.example.automobilestore.model.VerticalCarData;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 

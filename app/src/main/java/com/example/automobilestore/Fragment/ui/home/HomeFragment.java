@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -56,6 +57,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -71,6 +73,7 @@ public class HomeFragment extends Fragment {
     FirebaseFirestore db;
     private FirebaseUser curUser;
     List<VerticalCarData> VerticalList = new ArrayList<>();
+    List<VerticalCarData> newList = new ArrayList<>();
     boolean priceChanged = false;
     boolean passengerChanged = false;
     ImageView filter,imageView3,list,grid;
@@ -203,55 +206,55 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        search.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String s=search.getText().toString().toLowerCase();
-//
-////                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
-//                if(s.isEmpty()||s==null) {
-//                    Log.d(TAG, "onClick: hellooooo");
-//                    search.setVisibility(View.GONE);
-//                    imageView3.setVisibility(View.VISIBLE);
-//                    RefreshData();
-//                }else {
-//
-//                    Search(search.getText().toString());
-//                }
-//            }
-//
-//        });
-
-
-
-        search.setOnKeyListener(new View.OnKeyListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            public void onClick(View v) {
+
                 String s=search.getText().toString().toLowerCase();
 
 //                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onKey: "+s.isEmpty()+"  "+keyCode);
-                if(keyCode==66||s.isEmpty()&&keyCode==67){
-
-                    search.setText("");
+                if(s.isEmpty()||s==null) {
                     Log.d(TAG, "onClick: hellooooo");
                     search.setVisibility(View.GONE);
                     imageView3.setVisibility(View.VISIBLE);
-                    if (LayoutType=="Grid"){
-                        list.setVisibility(View.VISIBLE);
-
-                    }else {
-                        grid.setVisibility(View.VISIBLE);
-                    }
                     RefreshData();
                 }else {
 
                     Search(search.getText().toString());
                 }
-                return false;
             }
+
         });
+
+
+//
+//        search.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                String s=search.getText().toString().toLowerCase();
+//
+////                Toast.makeText(getActivity(), ""+count++, Toast.LENGTH_SHORT).show();
+//                Log.d(TAG, "onKey: "+s.isEmpty()+"  "+keyCode);
+//                if(keyCode==66||s.isEmpty()&&keyCode==67){
+//
+//                    search.setText("");
+//                    Log.d(TAG, "onClick: hellooooo");
+//                    search.setVisibility(View.GONE);
+//                    imageView3.setVisibility(View.VISIBLE);
+//                    if (LayoutType=="Grid"){
+//                        list.setVisibility(View.VISIBLE);
+//
+//                    }else {
+//                        grid.setVisibility(View.VISIBLE);
+//                    }
+//                    RefreshData();
+//                }else {
+//
+//                    Search(search.getText().toString());
+//                }
+//                return false;
+//            }
+//        });
 
 
         return v;
@@ -303,34 +306,23 @@ public class HomeFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("search Data", "search calll");
-                                Log.d("", document.getId() + " => " + document.getData());
-                                System.out.println(document.getId() + " => " + document.getData());
-                                Log.d("search Data", "search calll2");
+
                                 String Model = (String) document.getData().get("Model");
                                 Float Amount = Float.parseFloat(String.valueOf(document.getData().get("Amount")));
                                 String condition = (String) document.getData().get("Conditon");
-                                String Classification = (String) document.getData().get("Classification");
-                                Log.d("search Data", "search calll3");
-                                int Seaters = Integer.parseInt(String.valueOf(document.getData().get("Seaters")));
-                                Log.d("search Data", "search calll4");
                                 String UserID = document.getId();
-
-
-
                                 Log.d("search Data", "search modellll" + Model);
-                                Log.d("search Data", "search amounttttt" + Amount);
-
+                                setVertical();
 //                                if ((Model.toLowerCase()).startsWith(finalSearch_text) || (Address.toLowerCase()).startsWith(finalSearch_text) || (Classification.toLowerCase()).startsWith(finalSearch_text)) {
-                                if ((Model.toLowerCase()).startsWith(search_text)){
-
+                                if ((Model.toLowerCase()).contains(search_text)){
+                                    Log.d(TAG, "onComplete: "+Model);
                                     getSearch(UserID, Model, Amount.toString(),condition);
-                                  setVertical();
+
 
                                 } else {
 
                                     VerticalList.clear();
-                                    setVertical();
+
                                     // Toast.makeText(getActivity().getApplicationContext(), "Oops No Cars Found", Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -385,8 +377,8 @@ public class HomeFragment extends Fragment {
         if (LayoutType == "Grid") {
             GridLayoutManager Manager = new GridLayoutManager(getContext(),2);
             VerticalRecycler.setLayoutManager(Manager);
-        }else{
-        LinearLayoutManager Manager= new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
+        }else {
+            LinearLayoutManager Manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
             VerticalRecycler.setLayoutManager(Manager);
         }
 
@@ -401,8 +393,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSuccess(Uri uri) {
 
-                VerticalList.clear();
+//                VerticalList.clear();
                 Log.d(TAG, "getSearch: hellooooo");
+
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    newList=VerticalList.stream().distinct().collect(Collectors.toList());
+//                }
 
                 VerticalList.add(new VerticalCarData(UserID,Model, Amount, uri,condition));
                 VerticalAdapter.notifyDataSetChanged();
